@@ -1,0 +1,88 @@
+<html>
+<header>Nandini Agrawal</header>
+<header>
+    JS Task 1
+</header>
+<header>
+    Employee ID : 24DEV075
+</header>
+
+<head>
+    <style>
+        body {
+            margin: 25px 50px;
+        }
+
+        table {
+
+            table-layout: fixed;
+            width: 350px;
+            height: 30%;
+            border: 1px solid black;
+            position: relative;
+            border-collapse: collapse;
+        }
+
+        td {
+            text-align: center;
+            padding: 10px;
+            overflow: hidden;
+            border: 1px solid black;
+            padding: 20px;
+        }
+
+        tr:nth-of-type(even) td:nth-of-type(even),
+        tr:nth-of-type(odd) td:nth-of-type(odd) {
+            background-color: gray;
+        }
+    </style>
+    <script>
+        function coladd() {
+            document.querySelectorAll("tr").forEach((tr) => {
+                let td = document.createElement("td");
+                tr.appendChild(td);
+            })
+        }
+        function rowadd() {
+            document.querySelector('table').appendChild(
+                document.querySelector("tr").cloneNode("true")
+            );
+        }
+        function removecol() {
+            if (document.querySelectorAll("tr")[0].childElementCount > 2) {
+                document.querySelectorAll("tr").forEach((tr) => {
+                    tr.removeChild(tr.lastChild)
+                })
+            }
+        }
+        function delRow() {
+            //console.log(document.querySelectorAll("td"));
+            if (document.querySelectorAll("tr").length > 2) {
+                document.querySelector("table").removeChild(document.querySelector("table").lastChild);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <table border="1">
+
+        <input type="button" value="+ Col" onclick="coladd()" style="margin: 5px">
+        <input type="button" value="- Col" onclick="removecol()" style="margin: 5px">
+
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <footer>
+        <input type="button" value="+ Row" onclick="rowadd()" style="margin: 5px">
+        <input type="button" value="- Row" onclick="delRow()" style="margin: 5px">
+    </footer>
+</body>
+
+</html>

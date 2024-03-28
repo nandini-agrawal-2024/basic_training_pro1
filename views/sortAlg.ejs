@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <title>Sorting In JavaScript</title>
+        
+        <header>Nandini Agrawal</header>
+        <header>
+            DSA Task 1 : Sorting Algorithms
+        </header>
+        <header>    
+        Employee ID : 24DEV075
+        </header>
+        <script>
+            // with user input : Dynamic
+            function bubbleSort()
+            {
+                let inputValues = document.getElementById('inputValues').value.split(',').map(Number);
+                let n = inputValues.length;
+
+                var temp;
+                for(let i=0; i<n-1; i++)
+                {
+                    for(let j=0; j<n - i - 1; j++)
+                    {
+                        if(inputValues[j] > inputValues[j+1])
+                        {
+                            temp = inputValues[j+1];
+                            inputValues[j+1] = inputValues[j];
+                            inputValues[j] = temp;
+                        }
+                    }
+                }
+                console.log(inputValues);
+                document.getElementById('sorted').innerHTML = "Bubble Sorted Arr : " + inputValues.join(",")
+            }
+
+            function selectionSort()
+            {
+                let inputValues2 = document.getElementById('inputValues').value.split(',').map(Number);
+                let n2 = inputValues2.length;
+
+                var temp2;
+                for(let i=0; i<n2 - 1; i++)
+                {
+                    let minimum = i;
+                    for(let j=i+1; j<n2; j++)
+                    {
+                        if(inputValues2[j] < inputValues2[minimum])
+                        {
+                            minimum = j;
+                        }
+                    }
+                    if(minimum != i)
+                    {
+                        temp2 = inputValues2[i];
+                        inputValues2[i] = inputValues2[minimum];
+                        inputValues2[minimum] = temp2;
+                    }
+                   
+                }
+                console.log(inputValues2);
+                    document.getElementById('sorted').innerHTML = "Selection Sorted Arr : " + inputValues2.join(",")
+            }
+
+            function insertionSort()
+            {
+                let inputValues3 = document.getElementById('inputValues').value.split(',').map(Number);
+                let n3 = inputValues3.length;
+
+                var temp3;
+                for(let i=1; i<n3; i++)
+                {
+                    let currentVal = inputValues3[i];
+                    let j = i-1;
+                    
+                    while(inputValues3[j]>currentVal && j >= 0)
+                    {
+                        inputValues3[j+1] = inputValues3[j];
+                        j--;
+                    }
+                    inputValues3[j+1] = currentVal
+                }
+                console.log(inputValues3);
+                document.getElementById('sorted').innerHTML = "Insertion Sorted Arr : " + inputValues3.join(",")
+            }
+           
+        </script>
+        <style>
+            header{font-size: 20px;color: darkslategrey;margin: 10px;}
+            button{padding: 10px;color: white;border-radius: 10px;margin-left: 50px;background-color: darkslategrey;}
+            input{margin: 20px;align-self: center;}
+            hr{width: 80%;}
+            input{padding: 10px; font-size: 20px;}
+            p{font-size: 20px;}
+        </style>
+    </head>
+    <body>
+            
+        <hr>
+        <center><label for="values">Input Array</label>
+        <input type="text" id="inputValues" placeholder="Enter values [0,11,2,3,67]"><br><br></center>
+        <table>
+        <tr>
+            <td><button onclick="bubbleSort()" value="Bubble Sort Array">Bubble Sort Array</button></td>
+            <td><button onclick="selectionSort()" value="Selection Sort Array">Selection Sort Array</button></td>
+            <td><button onclick="insertionSort()" value="Insertion Sort Array">Insertion Sort Array</button></td>
+        </tr>
+        </table>
+
+        <p id= "sorted"></p>
+        
+    </body>
+</html>

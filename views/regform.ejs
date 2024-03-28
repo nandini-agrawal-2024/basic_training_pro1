@@ -1,0 +1,102 @@
+<html>
+<head>
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="style.css">
+    <style>h3{color:white;}span{font-size: 12px;}</style>
+</head>
+
+<body>    
+    <form action="/insert" method="post" onsubmit="return validateregform()">
+        <table class="regtable">
+            <tr>
+                <td><label for="first_name">First Name</label></td>
+                <td><input type="text" id="first_name" name="first_name" placeholder="Enter First Name"></td>
+                <tr><td colspan="2"><span id="errFname"></span></td></tr>
+            </tr>
+            <tr>
+                <td><label for="last_name">Last Name</label></td>
+                <td><input type="text" id="last_name" name="last_name" placeholder="Enter Last Name"></td>
+                <tr> <td><span id="errLname"></span></td></tr>
+            </tr>
+
+            <tr>
+                <td><label for="email">Email</label></td>
+                <td><input type="text" id="email" name="email" placeholder="abc@gmail.com"></td>
+                <tr><td><span id="errMail"></span></td></tr>
+            </tr>
+            <tr>
+                <td><label for="phone_number">Contact Number</label></td>
+                <td><input type="text" id="phone_number" name="phone_number" placeholder="Enter Contact Number"></td>
+                <tr><td><span id="errNum"></span></td></tr>
+            </tr>
+            <tr>
+                <td colspan="2"> 
+                    <input type="submit" id="submit" name="submit" value="Register">
+                    <input type="reset" id="reset" name="reset" value="Reset" style="margin-left: 10px;">
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-top: 10px;font-weight: bold;font-size: 15px;">Already Registered?..</td>
+                <td><a href="/loginAuth" style="text-decoration: none;padding-top: 10px;">Login</a></td>
+            </tr>
+        </table>
+    </form>
+
+    
+<script>
+
+    function validateregform() 
+    {
+        var isValid = true;
+
+        var email = document.getElementById('email').value;
+        document.getElementById('errMail').innerHTML = '';
+        if (email === '') {
+        errMail.innerHTML = "Email Is Required Field"
+        isValid = false
+        }
+        else if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            .test(email)) {
+            errMail.innerHTML = "Email Not Valid"
+            isValid = false
+        }
+        
+        var first_name = document.getElementById('first_name').value;
+        document.getElementById('errFname').innerHTML = '';
+        if (first_name === '') {
+            errFname.innerHTML = 'First Name Can Not Be Blank';
+            isValid = false;
+        } else if (!/^[a-zA-Z]+$/.test(first_name)) {
+            errFname.innerHTML = 'Enter Only Letters';
+            isValid = false;
+        }
+
+        var last_name = document.getElementById('last_name').value;
+        document.getElementById('errLname').innerHTML = '';
+        if (last_name === '') {
+            errLname.innerHTML = 'Last Name Can Not Be Blank';
+            isValid = false;
+        } else if (!/^[a-zA-Z]+$/.test(last_name)) {
+            errLname.innerHTML = 'Enter Only Letters';
+            isValid = false;
+        }
+
+        var phone_number = document.getElementById('phone_number').value;
+        document.getElementById('errNum').innerHTML = '';
+        if (phone_number === '') {
+            errNum.innerHTML = "Conatct Number is required field"
+            isValid = false
+        }
+        else if (!/^\d{10}$/.test(phone_number)) {
+            errNum.innerHTML = "Only 10 Digits are allowed"
+            isValid = false;
+        }
+
+        return isValid; 
+    }
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<html>
+    <title>Get New Activation Link</title>
+    <style>
+        body{text-align: center;margin-top: 30px;background-color: black;}
+        h3{color: darkcyan;}
+        h4{font-size: 20px;padding-top: 20px;}
+        .activate{background-color:#ccd1d1;height: 100%; width: 50%; height: 50%;margin-left: 24%;border-radius: 20px;border: 1px solid black;}
+    </style>
+   <body>
+    <div class="activate">
+        <table>
+            <tr>
+                
+                <h4>New Activation Link To Update Password</h4>
+                <input type="hidden" id="salt" name="salt" value="<%=result.salt %>">
+
+                <a href="/password?reg_id=<%=result.reg_id%>&activation_key=<%=result.activation_key %>">
+                    localhost:6009/password?reg_id=<%=result.reg_id%>&activation_key=<%=result.activation_key %>
+                </a>
+            </tr>
+        </table>
+    </div>
+    </body>
+</html>

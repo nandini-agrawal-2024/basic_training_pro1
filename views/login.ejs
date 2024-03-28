@@ -1,0 +1,58 @@
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <style>
+            .forgotPass{text-decoration: none;color: cadetblue;font-weight: bold;}
+    </style>
+    <title>Login page</title>
+</head>
+<body>
+    <form action="/loginAuth" method="post" id="loginForm" name="loginForm">
+        <table class="regtable" style="width: 25%;">
+            <tr><td colspan="2" style="color: darkcyan;font-weight: bold;">Welcome To The Login Screen</td></tr>
+            <tr>
+                <td><label for="email">Email ID</label></td>
+                <td><input type="text" id="email" name="email" placeholder="abc@gmail.com"></td>
+
+            </tr>
+            <tr>
+                <td><label for="pass">Password</label></td>
+                <td><input type="text" id="pass" name="pass" placeholder="Enter Your Password"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="button" id="submit" name="submit" value="Login" onclick="loginCheck()">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><a href="/forgot" class="forgotPass">Forgot Password?</a></td>
+            </tr>
+            <tr> <td colspan="2"><span id="errmsg"></span></td></tr>
+        </table>
+
+       
+    </form>
+
+    <script>
+        async function loginCheck()
+        {
+            let forminfo = document.getElementById("loginForm");
+            let data = new FormData(forminfo);
+            const param = new URLSearchParams(data);
+            const dataCon = await new Response(param).text();
+            console.log(typeof(dataCon));
+            let final = await fetch('http://localhost:6009/loginAuth', {
+                method: "POST",
+                headers: {'Content-type' : 'application/x-www-form-urlencoded'
+                },
+            body: dataCon
+            })
+        // console.log(await dataCon.json())
+            result = await final.json();
+            document.getElementById('errmsg').innerHTML = result.Notification;
+            
+        }
+    </script>
+</body>
+
+</html>

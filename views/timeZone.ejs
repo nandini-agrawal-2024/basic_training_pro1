@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>TimeZone Calculator</title>
+    <style>
+        table{height: 40%; width: 30%;}
+        td,select,input{padding: 10px;font-size: 20px;}
+    </style>
+</head>
+<body onchange="changeTime()">
+    <table>
+        <tr>
+            <td>Time<input type="text" id="time" name="time" placeholder="yyyy-mm-ddT02:00:00"></td>
+            <td>Convert Time<input type="text" id="showTime" name="showTime" ></td>
+        </tr>
+        <tr>
+            <td>
+                <div class="city">
+                    <select name="city" id="city">
+                        <option value="select">Select Any option</option>
+                        <option value="Europe/London">London</option>
+                        <option value="America/New_York">New York</option>
+                        <option value="Asia/Kolkata">Kolkata(IST)</option>
+                        <option value="Asia/Tokyo">Tokyo</option>
+                        <option value="Asia/chicago">Chicago</option>
+                    </select>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <select name="city_next" id="city_next">
+                        <option value="select">Select Any option</option>
+                        <option value="Europe/London">London</option>
+                        <option value="America/New_York">New York</option>
+                        <option value="Asia/Kolkata">Kolkata(IST)</option>
+                        <option value="Asia/Tokyo">Tokyo</option>
+                        <option value="Asia/chicago">Chicago</option>
+
+                    </select>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        function changeTime() 
+        {
+            const time = document.getElementById("time").value;
+            const city = document.getElementById("city").value;
+            const city_next = document.getElementById("city_next").value;
+
+            const t1 = new Date(time.toLocaleString('en-US',{timeZone: city}))
+            const t2 = new Date(time.toLocaleString('en-US',{timeZone: city_next}))
+
+            const data = t2.toLocaleString('en-US', {timeZone: city_next})
+            document.getElementById('showTime').value = data;
+        }
+    </script>
+</body>
+
+</html>

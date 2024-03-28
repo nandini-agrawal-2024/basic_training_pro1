@@ -1,0 +1,110 @@
+<html>
+<head>
+ <style>
+    table{border-style: 1px solid black;margin: auto;height: 300px;width: 300px;}
+    tr,td{width: 50px;height: 50px;text-align: center;
+        color: white;font-size: 30px;margin-top: 100px;border: 1px solid white;background-color: cadetblue}
+    p{text-align: center;color: white;font-size: 30px;}
+    body{color: black;}
+    header {font-size: 20px;color: darkslategrey;margin: 10px;}
+ </style>
+</head>
+<body>
+    <p id="result" style="color: black;"></p>
+       <header>Nandini Agrawal</header>
+        <header>
+            JS Task 3 : Tic Tac Toe 
+        </header>
+        <header>    
+        Employee ID : 24DEV075
+        </header>
+        <br><hr>
+    <table id="table">
+        <tr>
+            <td onclick="playtictactoe(0,0)"></td>
+            <td onclick="playtictactoe(0,1)"></td>
+            <td onclick="playtictactoe(0,2)"></td>
+        </tr>
+        <tr>
+            <td onclick="playtictactoe(1,0)"></td>
+            <td onclick="playtictactoe(1,1)"></td>
+            <td onclick="playtictactoe(1,2)"></td>
+        </tr>
+        <tr>
+            <td onclick="playtictactoe(2,0)"></td>
+            <td onclick="playtictactoe(2,1)"></td>
+            <td onclick="playtictactoe(2,2)"></td>
+        </tr>
+    </table>
+
+<script>
+
+let game = [
+    ['','',''],['','',''],['','','']
+];
+
+let player = "x";
+
+function playtictactoe(row,col)
+{
+    if(game[row][col] === '')
+    {
+        game[row][col] = player;
+        document.getElementById("table").rows[row].cells[col].innerHTML = player;
+        if(winevent())
+        {
+            document.getElementById("result").innerHTML = player + ' wins';
+            setTimeout(()=>
+            {
+                window.location.reload();
+            },600)
+        }
+        if(draw())
+        {
+            document.getElementById("result").innerHTML = ' It is a Draw';
+            setTimeout(()=>
+            {
+                window.location.reload();
+            },600)
+        }
+        else{
+            player = player === 'x'?'o':'x';
+        }
+    }
+}
+
+function winevent()
+{
+    for(let i=0;i<3;i++)
+    {
+        if((game[i][0]===player && game[i][1]===player && game[i][2]===player) || 
+        (game[0][i]===player && game[1][i]===player && game[2][i]===player))
+        {
+            return true;
+        }}
+        if((game[0][0]===player && game[1][1]===player && game[2][2]===player) || (game[0][2]===player && game[1][1]===player && game[2][0]===player))
+        {
+            return true;
+        }
+        return false;
+    }
+
+function draw()
+{
+    for(let row of game)
+    {
+        for(let cell of row)
+        {
+            if(cell === '')
+            {
+                return false;
+            }
+         }
+    }
+    return true;
+}
+
+</script>
+
+</body>
+</html>

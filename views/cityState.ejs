@@ -1,0 +1,74 @@
+<html>
+    <style>
+        .select{margin: 40px;height: 40%;}
+        .state{margin: 20px;padding: 20px;}
+        .city{margin: 20px;padding: 10px;}
+    </style>
+    <body onload="loading()">
+        
+        <div class="select">
+            <div class="state">
+                <label for="state">state</label>
+                <select name="state" id="state" onchange="cityrender(this.value)">
+                    <option value="select">select any option</option>
+                </select>
+            </div>
+
+            <div class="city">
+                <label for="city">City</label>
+                <select name="city" id="city">
+                    <option value="select">select any option</option>
+                </select>
+            </div>
+        </div>
+
+        <script>
+            function loading()
+            {
+                const request = new XMLHttpRequest();
+                request.onreadystatechange = function()
+                {
+                    if(this.readyState === 4 && this.status === 200)
+                    {
+                        var state = document.getElementById('state'); // console.log(this.response);
+                        JSON.parse(this.response).forEach(e => {
+                            var option = document.createElement("option")
+                            option.setAttribute("value", `${e.state_id}`)
+                            option.innerHTML= `${e.state_name}`;
+                            state.appendChild(option);
+                        });
+                    }
+                }
+                request.open("GET", "/state", true)
+                request.send()
+            }
+
+            function cityrender(value)
+            {
+                const request = new XMLHttpRequest();
+                request.onreadystatechange = function()
+                {
+                    if(this.readyState === 4 && this.status === 200)
+                    {
+                        console.log(this.response)
+                        var city = document.getElementById('city');
+                        let child = city.lastElementChild;
+                        while(child)
+                        {
+                            city.removeChild(child);
+                            child = city.lastElementChild
+                        }
+                        JSON.parse(this.response).forEach(e => {
+                            var option = document.createElement("option")
+                            option.setAttribute("value", `${e.city_name}`)
+                            option.innerHTML= `${e.city_name}`;
+                            city.appendChild(option)
+                        });
+                    }
+                }
+                request.open("GET", `/city/${value}`, true)
+                request.send()
+            }
+        </script>
+    </body>
+</html>
