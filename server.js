@@ -17,11 +17,14 @@ const con = require('./src/config/connect')
 const login = require('./src/routes/authentication')
 const OtherTask = require('./src/routes/OtherTask')
 const nodeTask = require('./src/routes/nodeTask')
+const jobappAjax = require('./src/routes/jobappAjax')
 
 app.set('view engine', 'ejs');
 app.use("/",login)
+app.use("/",jobappAjax);
 app.use("/",OtherTask);
 app.use("/",nodeTask);
+
 
 app.listen(6009) 
 console.log(6009)

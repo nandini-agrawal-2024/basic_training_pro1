@@ -582,7 +582,6 @@ const getCities =  async(req,res) => {
 }
 
 
-
 module.exports = 
 {
   getStart,getIndex,
@@ -609,6 +608,8 @@ module.exports =
 
   getSortCols,
 
-  getPosts,getIdPost
+  getPosts,getIdPost,
+
+  // getJobForm,postInsertJob
 }
   

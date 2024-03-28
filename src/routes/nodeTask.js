@@ -22,7 +22,6 @@ login.route("/resultGrid").get(getResultGrid);
 login.route("/view").get(getReportResult);
 login.route("/attResult").get(getAttResult);
 
-
 login.route("/studentSort").get(getStudentSort);
 
 login.route("/searchDel").get(getSearchDel).post(getSearchDel)

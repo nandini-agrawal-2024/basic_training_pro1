@@ -4,11 +4,10 @@ var express = require("express")
 const con = require('../config/connect')
 
 const login = express.Router();
-const {
+const 
+{
     cityStateget,getSates,getCities,
-
     timeZoneget,
-    
     kukucubeget,dynamic_tableget,tictacget,sortAlgget,jsEventsget,jobAppget,
 } = require('../controller/auth')
 
@@ -26,5 +25,6 @@ login.route("/timezone").get(timeZoneget);
 login.route("/cityState").get(cityStateget);
 login.route('/state').get(getSates);
 login.route('/city/:state').get(getCities);
+
 
 module.exports = login;
