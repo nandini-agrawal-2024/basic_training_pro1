@@ -1,0 +1,35 @@
+<html>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    i{border: 1px solid aquamarine; font-size: 20px; width: 30px; text-align: center;
+        height: 20px; background-color: aquamarine; color: black; padding: 10px;}
+        div{text-align: end;}
+</style>
+
+<div>
+    <a href="/studentSort?page=1&order=<%= order %>"><i class="fa-solid fa-backward"></i></a>
+    <a href="/studentSort?page=<%= Number(page)-1 %>&order=<%= order %>">  <i class="fa-solid fa-arrow-left"></i>  </a>
+    <%= page %> Page
+    <a href="/studentSort?page=<%= Number(page)+1 %>&order=<%= order %>"> <i class="fa-solid fa-arrow-right"></i> </a>
+    <a href="/studentSort?page=250&order=<%= order %>"> <i class="fa-solid fa-forward"></i> </a>
+</div>
+
+<div>
+    <h3>sorted first name in <p id="order"><%= order %></h3></p>
+    <select class="div">
+        <option name="asc" value="asc" onclick="orderbyname('asc')">A-Z</option>
+        <option name="desc" value="desc" onclick="orderbyname('desc')">Z-A</option>
+    </select>
+</div>
+
+<script>
+    function orderbyname(first_name)
+    {
+        let order = first_name;
+        console.log(first_name)
+        document.getElementById('order').innerHTML = order;
+        window.location = `http://localhost:6009/studentSort?order=${order}`;
+    }
+</script>
+

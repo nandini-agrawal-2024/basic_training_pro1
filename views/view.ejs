@@ -1,0 +1,57 @@
+<html>
+    <body>
+        <style>p{font-size: 20px;} th{background-color: aqua;} 
+        table{width: 70%; height: 50%; text-align: center; margin: 50px;}
+        td{padding: 8px;}p{text-align: center;}h4{text-align: center;}
+        </style>
+            <tr>
+                <p>Welcome, <b> <%= singleUser[0].stu_name %></p></b>
+                <p>Your id is ,<b> <%= singleUser[0].stu_id %></p></b>
+                
+        <table border="1">
+            <tr>
+                <tr>
+                    <th rowspan="2">Student ID</th>
+                    <th rowspan="2">Subject Name</th>
+                    <th colspan="2">Terminal Exam</th>
+                    <th colspan="2">Prelim Exam</th>
+                    <th colspan="2">Final Exam</th>
+                    <th rowspan="2">Total </th>
+
+                </tr>
+                <tr>
+                    <th>Obt practical</th>
+                    <th>Obt Theory</th>
+                    <th>Obt practical</th>
+                    <th>Obt Theory</th>
+                    <th>Obt practical</th>
+                    <th>Obt Theory</th>
+                </tr>
+            </tr>
+            <tr>
+                
+            </tr>
+            <% for(var index=0,j=0; index<singleUser.length,j<6; index+= 3,j++){%>
+                <tr>
+                    <td> <%= singleUser[index].stu_id %></td>
+                    <td> <%= singleUser[j].sub_name %></td>
+                    
+                    <% for(let i=index; i<index + 3; i++) { %>
+                        <% if(singleUser[i].stu_id == singleUser[index].stu_id) { %> 
+                        <td><%= singleUser[i].obt_practical %></td>
+                        <td><%= singleUser[i].obt_thoery %></td>
+                        
+                    <%}%>
+                    <% } %>
+                    <td>
+                        <%= singleUser[index].obt_practical + singleUser[index].obt_thoery + singleUser[index+1].obt_practical + singleUser[index+1].obt_thoery 
+                        + singleUser[index+2].obt_practical + singleUser[index+2].obt_thoery %>
+                    </td>
+                </tr>
+            <%}%>
+
+            <h4>Total Attendance Is : <%= parseFloat((result1[0].Present_Day/91)*100).toFixed(2) %></h4>
+            <h4>Total Present Day Is : <%= result1[0].Present_Day %></h4>
+        </table>
+    </body>
+</html>

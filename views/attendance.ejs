@@ -1,0 +1,45 @@
+<body>
+    <style>
+        th{background-color: aqua;}
+        table{height: 50%; width: 100%; text-align: center;}
+    </style>
+    <div>
+        <%- include('att_comp', {p,m}); %>
+    </div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>NAME</th>
+                <th>PRESENT DAY</th>
+                <th>PERCENTAGE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(i=0; i<result.length; i++){%>
+                <tr>
+                    <td><%= result[i].stu_id %></td>
+                    <td><%= result[i].stu_name %></td>
+                    <td><%= result[i].Present_Day %></td>
+                    <% if(m==12){%>
+                        <td>
+                            <%= parseFloat((result[i].Present_Day/31)*100).toFixed(2) %> %</td>
+                        </td>
+                        <% } %>
+
+                        <% if(m==1){%>
+                            <td>
+                                <%= parseFloat((result[i].Present_Day/31)*100).toFixed(2) %> %</td>
+                            </td>
+                            <% } %>
+
+                        <% if(m==2){%>
+                            <td>
+                                <%= parseFloat((result[i].Present_Day/29)*100).toFixed(2) %> %</td>
+                            </td>
+                            <% } %>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>
+</body>

@@ -1,0 +1,53 @@
+<html>
+    <style>
+        
+        form{text-align: center;margin: 20px;}
+        input{width: 30%; padding: 20px;}
+        h2{text-align: center;margin-top: 20px;}
+        button{background-color: cadetblue; border: 1px solid cadetblue;padding: 20px;}
+        table{margin: 100px; border: 1px solid black;width: 80%;}
+        th{background-color: cadetblue;padding: 20px;border: 1px solid black; }
+        td{padding: 15px; text-align: center;border: 1px solid black;}
+    </style>
+    
+    <body>
+        <h2>Nandini Agrawal</h2>
+        <h2>Mysql Query Execute </h2>
+        <h2>24DEV075</h2>
+
+        <div>
+        <form action="/sqlTableGen?page=1" method="get">
+            <label for="textq">Enter Your Query</label>
+            <input type="text" placeholder="select * from tablename" name="textq" autocomplete="off" >
+            <button  type="submit" >Execute Query</button>
+          
+        </form>
+    </div>
+
+        <% if(result.length != 0) {%> 
+        <div>
+            <%- include('./pagecomp', {p,lastlimit}) %>  
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <% for(let i=0; i<key.length; i++) {%>
+                        <th><%=key[i]%> </th>
+                        <% } %>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% for(let i=0; i<result.length; i++) { %>
+                    <tr>
+                        <% for(let j=0; j<key.length; j++) { %>
+                            <td><%=result[i][key[j]]%></td>
+                        <% } %>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <% } %>
+
+    </body>
+</html>

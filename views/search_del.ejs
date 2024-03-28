@@ -1,0 +1,51 @@
+<html><head><style>
+            body{text-align: center;}
+            table{height: 30%; width: 100%;border-color: azure;}
+            th{background-color: cadetblue; font-weight: bold;color: azure; }
+            th,td{text-align: center;}
+            input{text-align: center; width: 40%; padding: 20px; font-size: 20px;border-color: cadetblue; }
+            input[type=submit]{width: 20%; background-color: cadetblue;}
+        </style>
+    </head>
+    <body>
+        <h2>Nandini Agrawal </h2><h2>24DEV075</h2>
+        <h2>5 March : Search </h2>
+
+        <table border="1"  style="height: 20px; width: 50%; margin: 10px;">
+            <tr><th>stuname</th><th>course</th><th>age</th><th>city</th><th>university</th></tr>
+            <tr><td>@</td><td>#</td><td>$</td><td>%</td><td>^</td></tr>
+        </table>
+
+        
+
+        <form action="/searchDel">
+            <input type="text" name="input" placeholder="search data here" autofocus value="<%=input%>">
+            <input type="submit" value="Search">
+        </form>
+
+        <table border="1">
+            <tr><th>Student ID</th>
+                <th>Student Name</th>
+                <th>Choosen Course</th>
+                <th>Pincode</th>
+                <th>Age</th>
+                <th>University</th>
+                <th>City</th>
+
+            </tr>
+
+        <form method="post">
+            <% for(let i=0; i<result.length;i++){%>
+                <tr>
+                    <td> <%= result[i].stu_id %></td>
+                    <td> <%= result[i].stu_name %></td>
+                    <td> <%= result[i].course %></td>
+                    <td> <%= result[i].pincode %></td>
+                    <td> <%= result[i].age %></td>
+                    <td> <%= result[i].university %></td>
+                    <td> <%= result[i].city %></td>
+                </tr>
+            <% } %>
+        </form>
+    </body>
+</html>

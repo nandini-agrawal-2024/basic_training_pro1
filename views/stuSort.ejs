@@ -1,0 +1,45 @@
+<!-- display all students record -->
+<html>
+    <head>
+        <style>
+            table{height: 30%; width: 100%;border-color: azure;}
+            th{
+                background-color: cadetblue; font-weight: bold;color: azure; 
+                padding: 10px;}
+            th,td{text-align: center;}
+        </style>
+    </head>
+    <body><h1>Student List From Database : 26Feb_Node</h1>
+        <table border="1">
+            <tr><th>Student ID</th>
+                <th>First Name</th><th>Last Name</th><th>Age</th>
+                <th>Gender</th><th>Relationship Status</th>
+                <th>Choosen Course</th>
+                <th>Country</th>
+                <th>University</th>
+                <th>Skills</th>
+                <th>Created AT </th>
+
+            </tr>
+            <div>
+                <%- include('./comp', {page,order}) %>  
+            </div>
+        <form method="post">
+            <% for(let i=0; i<result.length;i++){%>
+                <tr>
+                    <td> <%= result[i].stu_id %></td>
+                    <td> <%= result[i].first_name %></td>
+                    <td> <%= result[i].last_name %></td>
+                    <td> <%= result[i].age %></td>
+                    <td> <%= result[i].gender %></td>
+                    <td> <%= result[i].relationship %></td>
+                    <td> <%= result[i].course %></td>
+                    <td> <%= result[i].country %></td>
+                    <td> <%= result[i].university %></td>
+                    <td> <%= result[i].skill %></td>
+                    <td> <%= result[i].created_at %></td>
+                </tr>
+            <% } %>
+        </form>
+    </body>
+</html>
