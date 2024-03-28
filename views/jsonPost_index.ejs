@@ -1,0 +1,96 @@
+<html>
+    <body onload="fetchData()">
+        <h2>Nandini Agrawal : 24DEV075</h2>
+        <h2>jsonplaceholder API</h2>
+        <style>table{width: 80%;margin: 20px;}td{padding: 10px;}th{background-color: cadetblue;color: white;}
+                a{text-decoration: none;}
+                input[type=button]{background-color: cadetblue; padding: 15px;border-radius:10px;}
+        </style>
+
+        <div class="page">
+            <table class="pagec">
+                <tr>
+                    <td><input type="button" value="Previous Page" onclick="prev()"></td>
+                    <td><h1 id="pageno">1</h1></td>
+                    <td><input type="button" value="Next Page" onclick="next()"></td>
+                   
+                </tr>
+            </table>
+        </div>
+
+        <table border="1">
+            <tr>
+                <th>User ID</th><th>ID</th><th>Title</th><th>Body</th><th>Details</th>
+            </tr>
+            <tbody id="info">
+            </tbody>
+        </table>
+        <script>
+            var totalpage = 10;
+            var max = 0;
+
+            const url = 'https://jsonplaceholder.typicode.com/posts';
+            async function fetchData()
+            {
+                await fetch(url, 
+                {
+                    headers : {"Content-Type" : "application/json"},
+                }).then((response) => response.json())
+                .then(info => 
+                {
+                    max = info.length;
+                    console.log(info);
+                    console.log(typeof(info))
+
+                    if(info.length > 0)
+                    {
+                        var temp = "";
+                        info.slice(totalpage - 10, totalpage).forEach((itemInfo) => {
+                            temp += "<tr>";
+                            temp += "<td>" +  itemInfo.userId + "</td>"
+                            temp += "<td>" +  itemInfo.id + "</td>"                         
+                            temp += "<td>" +  itemInfo.title + "</td>"                         
+                            temp += "<td>" +  itemInfo.body + "</td>" 
+                            temp += "<td>" + "<a href= '" + itemInfo.id +"'>" + "View" + "</a></td></tr>";                    
+                        });
+                        document.getElementById('info').innerHTML = temp;
+                    }
+                })
+            }
+                
+            pageno = document.getElementById("pageno");
+            const prev = () => 
+            {
+                if(totalpage != 10)
+                {
+                    totalpage -= 10;
+                    p = totalpage / 10;
+                    pageno.innerHTML = p;
+                    fetchData();
+                }
+            }
+            const next = () => 
+            {
+                if(totalpage != max)
+                {
+                    totalpage += 10;
+                    p = totalpage / 10;
+                    pageno.innerHTML = p;
+                    fetchData();
+                }
+            }
+
+            const lastpage = () => 
+            {
+                if(totalpage == 10)
+                {
+                    totalpage = 10;
+                    p = totalpage;
+                    pageno.innerHTML = p;
+                    fetchData(totalpage);
+                }
+            }
+            
+        </script>
+    </body>
+</html>

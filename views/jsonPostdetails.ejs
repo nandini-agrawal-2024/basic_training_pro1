@@ -1,0 +1,78 @@
+<html>
+    <style>
+        body{text-align: center;}
+        input[type=button]{margin: 30px;width: 30%;padding: 10px; 
+            background-color: cadetblue;color: white; font-size: 15px;}
+        .comTable{width: 70%;margin: 40px;font-size: medium; word-wrap: break-word;text-align: center;}
+        th{background-color: cadetblue;color: white;}legend{color: cadetblue;font-weight: bolder;}
+</style>
+    <body>
+        <div id="postdata"></div>
+        <div id="commentData"></div>
+
+        <script>
+            const fetchuserdata = async() =>
+            {
+                var id = window.location.href.split("/").pop();
+                console.log(id);
+
+                const url =  `https://jsonplaceholder.typicode.com/posts/${id}`;
+                let dataitem = "";
+                console.log(typeof(dataitem))
+                
+                await fetch(url, {
+                    headers:{"Content-Type" : "application/json"},
+
+                }).then((response) => response.json()
+                ).then((data) => {
+                    console.log(data)
+                    var printdata = document.getElementById("postdata")
+                    printdata.innerHTML = 
+                    `<body><fieldset><legend>Post Details</legend>
+                    <b>UserID</b> : ${data.userId}<br>
+                    <b>ID</b> : ${data.id}<br>
+                    <b>Title</b> : ${data.title}<br>
+                    <b>Body</b>: ${data.body}<br>
+                    <input type = "button" value="Show Comments" onclick="fetchComment()"></body></fieldset>
+                    `
+                });
+            };
+
+            const fetchComment = async() =>
+            {
+                var id = window.location.href.split("/").pop();
+                console.log(id);
+
+                const url =  `https://jsonplaceholder.typicode.com/posts/${id}/comments`;
+                let dataitem = "";
+                await fetch(url, 
+                {
+                    headers:{"Content-Type" : "application/json"},
+                }).then((response) => response.json()
+                ).then((data) => 
+                {
+                console.log(data)
+   
+                for(var i=0;i<5;i++)
+                {
+                    var printdata = document.getElementById("commentData")
+                    printdata.innerHTML += 
+                    `
+                    <table border=1 class="comTable">
+                        <tr><th>PostId</th><th>Id</th><th>Name</th><th>Email</th><th>Body</th></tr>
+                        <tr>
+                            <td>${data[i].postId}</td>
+                            <td>${data[i].id}</td>
+                            <td>${data[i].name}</td>
+                            <td>${data[i].email}</td>
+                            <td>${data[i].body}</td>
+                        </tr>
+                    </table>
+                    `
+                }
+                });
+            };
+            fetchuserdata();
+        </script>
+    </body>
+</html>

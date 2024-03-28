@@ -76,11 +76,11 @@
             <% } %>
 
             <div>
-                <a href="/searchID?page=1"><i class="fa-solid fa-backward"></i></a>
-                <a href="/searchID?page=<%= Number(page)-1 %>">  <i class="fa-solid fa-arrow-left"></i>  </a>
+                <a href="/searchID?page=1" <%if(Number(page)==1){%>onclick='return false;'}<%}%>> <i class="fa-solid fa-backward"></i></a>
+                <a href="/searchID?page=<%= Number(page)-1 %>" <%if(Number(page)==1){%>onclick='return false;'} <%}%>  >  <i class="fa-solid fa-arrow-left"></i>  </a>
                 <%= page %> Page
-                <a href="/searchID?page=<%= Number(page)+1 %>"> <i class="fa-solid fa-arrow-right"></i> </a>
-                <a href="/searchID?page=10"> <i class="fa-solid fa-forward"></i> </a>
+                <a href="/searchID?page=<%= Number(page)+1 %>" <%if(Number(page)==10){%>onclick='return false;'} <%}%> > <i class="fa-solid fa-arrow-right"></i> </a>
+                <a href="/searchID?page=10" <%if(Number(page)==10){%>onclick='return false;'} <%}%>> <i class="fa-solid fa-forward"></i> </a>
             </div>
             
      </form>

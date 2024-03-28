@@ -2,6 +2,8 @@ var express = require("express")
 var bodyparser = require("body-parser")
 var app = express();
 
+const path = require('path')
+
 var md5 = require("md5");
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser')

@@ -9,7 +9,9 @@ const
     getAtt,getMysqlTableGen,
     getResultGrid,getReportResult,getAttResult,
     getStudentSort,
-    getSearchDel,getSearchID
+    getSearchDel,getSearchID,
+    getSortCols,
+    getPosts,getIdPost
 } = require('../controller/auth')
 
 
@@ -26,6 +28,10 @@ login.route("/studentSort").get(getStudentSort);
 login.route("/searchDel").get(getSearchDel).post(getSearchDel)
 login.route("/searchID").get(getSearchID).post(getSearchDel);
 
+login.route("/SortCols").get(getSortCols)
+
+login.route("/getPost").get(getPosts)
+login.route("/:id").get(getIdPost)
 
 
 module.exports = login;

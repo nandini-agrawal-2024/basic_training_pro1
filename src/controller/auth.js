@@ -13,6 +13,8 @@ app.use(express.static("public"))
 app.use(express.static('views'))
 app.use(bodyparser.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
+const path = require('path')
+
 
 function genSalt(length)  
     {
@@ -175,10 +177,6 @@ const forgotPost =  async(req,res) =>
   }
 }
 
-const cityStateget = async (req,res) => {
-    res.render('cityState')
-  };
-  
   const kukucubeget = async  (req,res) => {
     res.render('kukucube')
   }
@@ -459,10 +457,11 @@ const getSearchDel = async(req,res) =>
 
 const getSearchID = async (req,res) => 
 {
+
   const page = req.query.page || 1;
   const limit = 10;
-  // const lastpage = Math.ceil(100/10);
   const offset = (page-1) * limit;
+
   
   const stu_id = req.query.stu_id;
   const stu_name = req.query.stu_name;
@@ -474,7 +473,7 @@ const getSearchID = async (req,res) =>
   
   try{
     if(stu_id){
-      var sql = `select * from student_masterr where stu_id=${stu_id}`
+      var sql = `select * from student_masterr where stu_id=${stu_id} limit ${limit} offset ${offset}`
       console.log(sql)
     }
     else
@@ -490,7 +489,7 @@ const getSearchID = async (req,res) =>
       {
         where = 'where ' + arr.join(` ${choose} `)
       }
-      sql = `select * from student_masterr ${where}`;
+      sql = `select * from student_masterr ${where} limit ${limit} offset ${offset}`;
     }
 
     con.query(sql, (err,result) => 
@@ -502,12 +501,86 @@ const getSearchID = async (req,res) =>
       }
     })
   }
-
-  catch(err)
-  {
+  catch(err){
     console.error(err);
   }
 }
+
+const getSortCols = async (req,res) => 
+{
+  let page = req.query.page || 1;
+
+  const limit = 10;
+  const last = Math.ceil(50000/limit)
+  const offset = (page-1) * limit;
+
+  const sortorder = req.query.sort === 'desc' ? 'desc' : 'asc';
+  const sortField = req.query.select || 'stu_id';
+
+  // console.log(page);
+
+  const query = `select * from studentMaster order by ${sortField} ${sortorder} limit ${limit} offset ${offset}`
+  con.query( query , (err,result,fields) => 
+  {
+    if(err) throw err;
+    res.render('sortAllCol',{result,page,last,sortorder,sortField})
+  })
+}
+
+
+const getPosts = async(req,res)=> 
+{
+  try{
+    res.render('jsonPost_index')
+    // res.sendFile(path.join(__dirname , "views" , "/index.html"))
+  }
+  catch(error){
+    console.log(error)
+  }
+}
+
+const getIdPost = async(req,res)=>
+{
+  try{
+    res.render('jsonPostdetails')
+    // res.sendFile(path.join(__dirname , "views" , "/details.html"))
+  }
+  catch(error){
+    console.log(error)
+  }
+}
+
+const cityStateget = async (req,res) => {
+  res.render('cityState')
+};
+
+const getSates =  async (req,res) => {
+    try
+    {
+        sqlSelect = `select * from state_master`;
+        data = await con.promise().query(sqlSelect);
+        result = data[0];
+        // console.log(result);
+        res.send(result);
+    }
+    catch(err)
+    {
+        res.send(err)
+    }
+}
+const getCities =  async(req,res) => {
+    try
+    {
+        sql2 =  `select * from city_master where state_id = ${req.params.state}`;
+        data = await con.promise().query(sql2);
+        result2 = data[0];
+        res.send(result2);
+    }catch(err)
+    {
+        res.send(err)
+    }
+}
+
 
 
 module.exports = 
@@ -518,7 +591,8 @@ module.exports =
   postLoginAuth,getLoginAuth,
   forgotPost,forgotGet,
 
-  cityStateget,kukucubeget,dynamic_tableget,
+  cityStateget,getSates,getCities,
+  kukucubeget,dynamic_tableget,
   tictacget,
   sortAlgget,
   jsEventsget,
@@ -531,6 +605,10 @@ module.exports =
 
   getStudentSort,
 
-  getSearchDel,getSearchID
+  getSearchDel,getSearchID,
+
+  getSortCols,
+
+  getPosts,getIdPost
 }
   
