@@ -115,18 +115,24 @@
                 <div class="ssc">
                         <label for="ssc_bname">Course</label>
                         <select name="course[]">
-
                             <option value="ssc">SSC</option>
                             <option value="hsc">HSC</option>
                             <option value="bachelor">Bachelor Degree</option>
                             <option value="master">Master</option>
                         </select>
+                        <span id="e1_cname"></span>
+                        
                         <label for="board">Board Name/Course Name</label>
-                        <input type="text" name="board[]" id="board">
+                        <input type="text" name="board[]" id="board_ssc">
+                        <span id="e1_bname"></span>
+                        
                         <label for="pass_year">Passing Year</label>
-                        <input type="text" name="pass_year[]" id="pass_year">
+                        <input type="text" name="pass_year[]" id="pass_year_ssc">
+                        <span id="e1_pass"></span>
+                        
                         <label for="percentage">Percentage</label>
-                        <input type="text" name="percentage[]" id="percentage">
+                        <input type="text" name="percentage[]" id="percentage_ssc">
+                        <span id="e1_per"></span>
                 </div>
                 <div class="ssc">
                     <label for="ssc_bname">Course</label>
@@ -137,11 +143,14 @@
                         <option value="master">Master</option>
                     </select>
                     <label for="board">Board Name/Course Name</label>
-                    <input type="text" name="board[]" id="board">
+                    <input type="text" name="board[]" id="board_hsc">
+                    <span id="e2_bname"></span>
                     <label for="pass_year">Passing Year</label>
-                    <input type="text" name="pass_year[]" id="pass_year">
+                    <input type="text" name="pass_year[]" id="pass_year_hsc">
+                    <span id="e2_pass"></span>
                     <label for="percentage">Percentage</label>
-                    <input type="text" name="percentage[]" id="percentage">
+                    <input type="text" name="percentage[]" id="percentage_hsc">
+                    <span id="e2_per"></span>
                 </div>
                 <div class="ssc">
                     <label for="ssc_bname">Course</label>
@@ -152,13 +161,18 @@
                         <option value="master">Master</option>
                     </select>
                     <label for="board">Board Name/Course Name</label>
-                    <input type="text" name="board[]" id="board">
-                    <label for="pass_year">Passing Year</label>
-                    <input type="text" name="pass_year[]" id="pass_year">
-                    <label for="percentage">Percentage</label>
-                    <input type="text" name="percentage[]" id="percentage">
+                    <input type="text" name="board[]" id="board_bach">
+                    <span id="e3_bname"></span>
 
-                </div>                
+                    <label for="pass_year">Passing Year</label>
+                    <input type="text" name="pass_year[]" id="pass_year_bach">
+                    <span id="e3_pass"></span>
+
+                    <label for="percentage">Percentage</label>
+                    <input type="text" name="percentage[]" id="percentage_bach">
+                    <span id="e3_per"></span>
+
+                </div>
             </div>
 
         </fieldset>
@@ -483,22 +497,14 @@ function validateform() {
     var zipcode = document.getElementById("zipcode").value;
     var location = document.getElementById("location").value;
     var department = document.getElementById("department").value;
-    // var ssc_bname = document.getElementById("ssc_bname").value;
-    // var php = document.getElementById('php').value;
-    // var beginer1 = document.getElementById('beginer1').value;
-    // var mideator1 = document.getElementById('mideator1').value;
-    // var expert1 = document.getElementById('expert1').value;
-
 
     console.log(email)
 
     document.getElementById('errMail').innerHTML = '';
     document.getElementById('errRelation').innerHTML = '';
     document.getElementById('errZipcode').innerHTML = '';
-    // document.getElementById('errSSCbname').innerHTML = '';
     document.getElementById('errLoc').innerHTML = '';
     document.getElementById('errDep').innerHTML = '';
-    // document.getElementById('errPhp').innerHTML = '';
 
 
     var isValid = true;
@@ -509,7 +515,7 @@ function validateform() {
     if (first_name === '') {
         errFname.innerHTML = 'First Name Can Not Be Blank';
         isValid = false;
-    } else if (!/^[a-zA-Z]+$/.test(first_name)) {
+    } else if (!/^[a-zA-Z a-zA-Z]+$/.test(first_name)) {
         errFname.innerHTML = 'First Name Can Only Contain Letters';
         isValid = false;
     }
@@ -519,7 +525,7 @@ function validateform() {
     if (last_name === '') {
         errLname.innerHTML = 'Last Name Can Not Be Blank';
         isValid = false;
-    } else if (!/^[a-zA-Z]+$/.test(last_name)) {
+    } else if (!/^[a-zA-Z  a-zA-Z]+$/.test(last_name)) {
         errLname.innerHTML = 'Last Name Can Only Contain Letters';
         isValid = false;
     }
@@ -532,7 +538,6 @@ function validateform() {
     }
 
     var gender = document.querySelector('input[name="gender"]:checked')
-  
     document.getElementById('errGender').innerHTML = '';
     if (!gender) {
         errGender.innerHTML = "You must select your gender!"
@@ -601,99 +606,87 @@ function validateform() {
     }
 
     // Education Validation
-    // var ssc_bname = document.getElementById("ssc_bname").value;
-    // var sscpassyear = document.getElementById("sscpassyear").value;
-    // var sscresult = document.getElementById("sscresult").value;
+    var board_ssc = document.getElementById("board_ssc").value;
+        var pass_year_ssc = document.getElementById("pass_year_ssc").value;
+        var percentage_ssc = document.getElementById("percentage_ssc").value;
+        document.getElementById('e1_pass').innerHTML = '';
+        document.getElementById('e1_bname').innerHTML = '';
+        document.getElementById('e1_per').innerHTML = '';
 
-    // var hsc_bname = document.getElementById("hsc_bname").value;
-    // var hscpassyear = document.getElementById("hscpassyear").value;
-    // var hscresult = document.getElementById("hscresult").value;
+        if (board_ssc === '') 
+        {
+            e1_bname.innerHTML = "Required"
+            isValid = false
+        }
+        else if (!/^[a-zA-Z a-zA-Z]+$/.test(board_ssc)) {
+            e1_bname.innerHTML = "Invalid Name"
+            isValid = false
+        }
 
-    // document.getElementById('errPass').innerHTML = '';
-    // document.getElementById('errHPass').innerHTML = '';
-    
-    // document.getElementById('errRes').innerHTML = '';
-    // document.getElementById('errHRes').innerHTML = '';
+         if (!/^\d{4}$/.test(pass_year_ssc)) {
+            e1_pass.innerHTML = "Enter Year Only"
+            isValid = false
+        }
 
-    // document.getElementById('errSSCbname').innerHTML = '';
-    // document.getElementById('errHSCbname').innerHTML = '';
-    // console.log(ssc_bname);
-     
+          var x = parseFloat(percentage_ssc);    
+            if (percentage_ssc === '') {
+                e1_per.innerHTML = "SSC Percentage is Required "
+                isValid = false
+            }
+            else if(isNaN(x) || x<0 || x>100)
+            {
+                e1_per.innerHTML = "Invalid Input"
+                isValid = false
+            }
 
-    // if (ssc_bname === '') {
-    //     errSSCbname.innerHTML = "Required"
-    //     isValid = false
-    // }
-    // else if (!/^[a-zA-Z]+$/.test(ssc_bname)) {
-    //     errSSCbname.innerHTML = "Invalid Name"
-    //     isValid = false
-    // }
+            var board_hsc = document.getElementById("board_hsc").value;
+            var pass_year_hsc = document.getElementById("pass_year_hsc").value;
+            var percentage_hsc = document.getElementById("percentage_hsc").value;
+            document.getElementById('e2_per').innerHTML = '';
+            document.getElementById('e2_pass').innerHTML = '';
+            document.getElementById('e2_bname').innerHTML = '';
 
-    // if (!/^\d{4}$/.test(sscpassyear)) {
-    //     errPass.innerHTML = "Enter Year Only"
-    //     isValid = false
-    // }
+           if (board_hsc === '' || !/^[a-zA-Z a-zA-Z]+$/.test(board_hsc)) {
+                e2_bname.innerHTML = "Invalid Hsc Board Name"
+                isValid = false
+            }
 
-    // if (hsc_bname === '') {
-    //     errHSCbname.innerHTML = "Required"
-    //     isValid = false
-    // }
-    // else if (!/^[a-zA-Z]+$/.test(hsc_bname)) {
-    //     errHSCbname.innerHTML = "Invalid Name"
-    //     isValid = false
-    // }
+            if (!/^\d{4}$/.test(pass_year_hsc)) {
+                e2_pass.innerHTML = "Enter Hsc Passed Year Only"
+                isValid = false
+            }
+            var y = parseFloat(percentage_hsc);    
+            if (percentage_hsc === '') {
+                e2_per.innerHTML = "HSC Percentage is Required "
+                isValid = false
+            }
+            else if(isNaN(y) || y<0 || y>100)
+            {
+                e2_per.innerHTML = "Invalid Input for percentage"
+            }
 
-    
-    // var x = parseFloat(sscresult);    var y = parseFloat(hscresult);
-    // if (sscresult === '') {
-    //     errRes.innerHTML = "Required"
-    //     isValid = false
-    // }
-    // else if(isNaN(x) || x<0 || x>100)
-    // {
-    //     errRes.innerHTML = "Invalid Input"
-    //     isValid = false
-    // }
-    // if (hscresult === '') {
-    //     errHRes.innerHTML = "Required"
-    //     isValid = false
-    // }
-    // else if(isNaN(x) || x<0 || x>100)
-    // {
-    //     errHRes.innerHTML = "Invalid Input"
-    //     isValid = false
-    // }
+            var board_bach = document.getElementById("board_bach").value;
+            var pass_year_bach = document.getElementById("pass_year_bach").value;
+            var percentage_bach = document.getElementById("percentage_bach").value;
+            document.getElementById('e3_per').innerHTML = '';
+            document.getElementById('e3_pass').innerHTML = '';
+            document.getElementById('e3_bname').innerHTML = '';
+            if (board_bach === '' ||  !/^[a-zA-Z a-zA-Z]+$/.test(board_bach)) 
+            {
+                e3_bname.innerHTML = "Invalid Board/Course Name"
+                isValid = false
+            }
+           
 
-    
-    // if (!/^\d{4}$/.test(hscpassyear)) {
-    //     errHPass.innerHTML = "Enter Year Only"
-    //     isValid = false
-    // }
-
-    // var bcourse_name = document.getElementById("bcourse_name").value;
-    // document.getElementById('errbcourse').innerHTML = '';
-    // var bachpassyear = document.getElementById("bachpassyear").value;
-    // document.getElementById('errBPass').innerHTML = '';
-    // var bachresult = document.getElementById("bachresult").value;
-    // document.getElementById('errBResult').innerHTML = '';
-    // if(!/^[a-zA-Z]+$/.test(bcourse_name)) {
-    //     errbcourse.innerHTML = "Invalid Name"
-    //     isValid = false
-    // }
-    // if (!/^\d{4}$/.test(bachpassyear)) {
-    //     errBPass.innerHTML = "Enter Year Only"
-    //     isValid = false
-    // }
-    // var z = parseFloat(bachresult);
-    // if (bachresult === '') {
-    //     errBResult.innerHTML = "Required"
-    //     isValid = false
-    // }
-    // else if(isNaN(z) || z<0 || z>100)
-    // {
-    //     errBResult.innerHTML = "Invalid Input"
-    //     isValid = false
-    // }
+            if (!/^\d{4}$/.test(pass_year_bach)) {
+                e3_pass.innerHTML = "Enter Bachelor Passed Year Only"
+                isValid = false
+            }
+            var z = parseFloat(percentage_bach); 
+             if(isNaN(z) || z<0 || z>100)
+            {
+                e3_per.innerHTML = "Invalid Input for percentage"
+            }
 
     // work experience 
 
@@ -701,11 +694,11 @@ function validateform() {
     document.getElementById('errComname').innerHTML = '';
     var des = document.getElementById("des").value;
     document.getElementById('errDes').innerHTML = '';
-    if (!/^[a-zA-Z]+$/.test(com_name)) {
+    if (!/^[a-zA-Z  a-zA-Z]+$/.test(com_name)) {
         errComname.innerHTML = "Enter Valid Data"
         isValid = false
     }
-    if (!/^[a-zA-Z]+$/.test(des)) {
+    if (!/^[a-zA-Z  a-zA-Z]+$/.test(des)) {
         errDes1.innerHTML = "Enter Valid Data"
         isValid = false
     }
@@ -749,13 +742,13 @@ function validateform() {
 
     var ref_name = document.getElementById("ref_name").value;
     document.getElementById('errRefname').innerHTML = '';
-    if (!/^[a-zA-Z]+$/.test(ref_name)) {
+    if (!/^[a-zA-Z a-zA-Z]+$/.test(ref_name)) {
         errRefname.innerHTML = "Enter Valid Name"
         isValid = false
     }
     var relation_name = document.getElementById("relation_name").value;
     document.getElementById('errRefRel').innerHTML = '';
-    if (!/^[a-zA-Z]+$/.test(relation_name)) {
+    if (!/^[a-zA-Z a-zA-Z]+$/.test(relation_name)) {
         errRefRel.innerHTML = "Enter Valid Name"
         isValid = false
     }
@@ -780,19 +773,6 @@ function validateform() {
         isValid = false
     }
 
-    // var expCTC = document.getElementById("expCTC").value;
-    // document.getElementById('errEx').innerHTML = '';
-    // if (!/^\d{6}$/.test(expCTC)) {
-    //     errEx.innerHTML = "Enter Digits Only"
-    //     isValid = false
-    // }
-
-    var notice = document.getElementById("notice").value;
-    document.getElementById('errNotice').innerHTML = '';
-    if (!/^[0-9]+$/.test(notice)) {
-        errNotice.innerHTML = "Enter Number Of Month Only"
-        isValid = false
-    }
 
     if (department === '') {
         errDep.innerHTML = "Select Any One Option"

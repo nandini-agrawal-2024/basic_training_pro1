@@ -135,12 +135,15 @@
                                 <option value="master">Master</option>
                             </select>
                             <span id="e1_cname"></span>
+                            
                             <label for="board">Board Name/Course Name</label>
                             <input type="text" name="board[]" id="board_ssc">
                             <span id="e1_bname"></span>
+                            
                             <label for="pass_year">Passing Year</label>
                             <input type="text" name="pass_year[]" id="pass_year_ssc">
                             <span id="e1_pass"></span>
+                            
                             <label for="percentage">Percentage</label>
                             <input type="text" name="percentage[]" id="percentage_ssc">
                             <span id="e1_per"></span>
@@ -154,11 +157,14 @@
                             <option value="master">Master</option>
                         </select>
                         <label for="board">Board Name/Course Name</label>
-                        <input type="text" name="board[]" id="board">
+                        <input type="text" name="board[]" id="board_hsc">
+                        <span id="e2_bname"></span>
                         <label for="pass_year">Passing Year</label>
-                        <input type="text" name="pass_year[]" id="pass_year">
+                        <input type="text" name="pass_year[]" id="pass_year_hsc">
+                        <span id="e2_pass"></span>
                         <label for="percentage">Percentage</label>
-                        <input type="text" name="percentage[]" id="percentage">
+                        <input type="text" name="percentage[]" id="percentage_hsc">
+                        <span id="e2_per"></span>
                     </div>
                     <div class="ssc">
                         <label for="ssc_bname">Course</label>
@@ -169,11 +175,16 @@
                             <option value="master">Master</option>
                         </select>
                         <label for="board">Board Name/Course Name</label>
-                        <input type="text" name="board[]" id="board">
+                        <input type="text" name="board[]" id="board_bach">
+                        <span id="e3_bname"></span>
+
                         <label for="pass_year">Passing Year</label>
-                        <input type="text" name="pass_year[]" id="pass_year">
+                        <input type="text" name="pass_year[]" id="pass_year_bach">
+                        <span id="e3_pass"></span>
+
                         <label for="percentage">Percentage</label>
-                        <input type="text" name="percentage[]" id="percentage">
+                        <input type="text" name="percentage[]" id="percentage_bach">
+                        <span id="e3_per"></span>
     
                     </div>
                 </div>
@@ -440,11 +451,13 @@
     function nextprev(n)
     {
         var x = document.querySelectorAll(".tab")
-        if(n==1 && !validateform()) return false;
-
-        x[curTab].style.display = "none";
-        curTab = curTab + n;
-        showtab(curTab);
+        if(!validateform()) return false;
+        else
+        {
+            x[curTab].style.display = "none";
+            curTab = curTab + n;
+            showtab(curTab);
+        }
     }
 
     async function submitForm()
@@ -465,319 +478,321 @@
 
 function validateform() 
 {
-
-    var email = document.getElementById('email').value;
-    var relationship = document.getElementById("relationship").value;
-    var zipcode = document.getElementById("zipcode").value;
-
-    document.getElementById('errMail').innerHTML = '';
-    document.getElementById('errRelation').innerHTML = '';
-    document.getElementById('errZipcode').innerHTML = '';
-
     var isValid = true;
 
-    var first_name = document.getElementById('first_name').value;
-    document.getElementById('errFname').innerHTML = '';
-    if (first_name === '') {
-        errFname.innerHTML = 'First Name Can Not Be Blank';
-        isValid = false;
-    } else if (!/^[a-zA-Z]+$/.test(first_name)) {
-        errFname.innerHTML = 'First Name Can Only Contain Letters';
-        isValid = false;
+    if(curTab==0)
+    {
+        var email = document.getElementById('email').value;
+        var relationship = document.getElementById("relationship").value;
+        var zipcode = document.getElementById("zipcode").value;
+
+        document.getElementById('errMail').innerHTML = '';
+        document.getElementById('errRelation').innerHTML = '';
+        document.getElementById('errZipcode').innerHTML = '';
+
+        
+        var first_name = document.getElementById('first_name').value;
+        document.getElementById('errFname').innerHTML = '';
+        if (first_name === '') {
+            errFname.innerHTML = 'First Name Can Not Be Blank';
+            isValid = false;
+        } else if (!/^[a-zA-Z]+$/.test(first_name)) {
+            errFname.innerHTML = 'First Name Can Only Contain Letters';
+            isValid = false;
+        }
+
+        var last_name = document.getElementById('last_name').value;
+        document.getElementById('errLname').innerHTML = '';
+        if (last_name === '') {
+            errLname.innerHTML = 'Last Name Can Not Be Blank';
+            isValid = false;
+        } else if (!/^[a-zA-Z]+$/.test(last_name)) {
+            errLname.innerHTML = 'Last Name Can Only Contain Letters';
+            isValid = false;
+        }
+
+        var designation = document.getElementById('designation').value;
+        document.getElementById('errDes').innerHTML = '';
+        if (designation === '') {
+            errDes.innerHTML = "Required Field"
+            isValid = false
+        }
+
+        var gender = document.querySelector('input[name="gender"]:checked')
+        document.getElementById('errGender').innerHTML = '';
+        if (!gender) {
+            errGender.innerHTML = "You must select your gender!"
+            isValid = false
+        }
+        
+        var phone_number = document.getElementById('phone_number').value;
+        document.getElementById('errNum').innerHTML = '';
+        if (phone_number === '') {
+            errNum.innerHTML = "Conatct Number is required field"
+            isValid = false
+        }
+        else if (!/^\d{10}$/.test(phone_number)) {
+        // else if (!/^\(([0-9]{4})\)?([0-9]{3})?([0-9]{3})$/.test(phone_number)) {
+            errNum.innerHTML = "Only 10 Digits are allowed"
+            isValid = true
+        }
+
+        if (email === '') {
+            errMail.innerHTML = "Email Is Required Field"
+            isValid = false
+        }
+        else if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            .test(email)) {
+                errMail.innerHTML = "Email Not Valid"
+            isValid = false
+        }
+
+        if (relationship === '') {
+            errRelation.innerHTML = "Select Any One Option"
+            isValid = false
+        }
+
+
+        if (zipcode === '') {
+            errZipcode.innerHTML = "Zipcode is Required Field"
+            isValid = false
+        }
+
+
+        var address = document.getElementById("address").value;
+        var city = document.getElementById("city").value;
+        var state = document.getElementById("state").value;
+        document.getElementById('errAdd').innerHTML = '';
+        document.getElementById('errCity').innerHTML = '';
+        document.getElementById('errState').innerHTML = '';
+        if (address === '') {
+            errAdd.innerHTML = "Required Field"
+            isValid = false
+        }
+        if (city === '') {
+            errCity.innerHTML = "Required Field"
+            isValid = false
+        }
+        if (state === '') {
+            errState.innerHTML = "Required Field"
+            isValid = false
+        }
+
+        var date_of_birth = document.getElementById("date_of_birth").value;
+        document.getElementById('errdob').innerHTML = '';
+        if (date_of_birth === '') {
+            errdob.innerHTML = "DOB Is Required Field"
+            isValid = false
+        }
+        else if (!/^\d{4}-\d{2}-\d{2}$/.test(date_of_birth)) {
+            errdob.innerHTML = "Invalid Date"
+            isValid = false
+        }
     }
 
-    var last_name = document.getElementById('last_name').value;
-    document.getElementById('errLname').innerHTML = '';
-    if (last_name === '') {
-        errLname.innerHTML = 'Last Name Can Not Be Blank';
-        isValid = false;
-    } else if (!/^[a-zA-Z]+$/.test(last_name)) {
-        errLname.innerHTML = 'Last Name Can Only Contain Letters';
-        isValid = false;
+    if(curTab==1)
+    {
+        var board_ssc = document.getElementById("board_ssc").value;
+        var pass_year_ssc = document.getElementById("pass_year_ssc").value;
+        var percentage_ssc = document.getElementById("percentage_ssc").value;
+        document.getElementById('e1_pass').innerHTML = '';
+        document.getElementById('e1_bname').innerHTML = '';
+        document.getElementById('e1_per').innerHTML = '';
+
+        if (board_ssc === '') 
+        {
+            e1_bname.innerHTML = "Required"
+            isValid = false
+        }
+        else if (!/^[a-zA-Z a-zA-Z]+$/.test(board_ssc)) {
+            e1_bname.innerHTML = "Invalid Name"
+            isValid = false
+        }
+
+         if (!/^\d{4}$/.test(pass_year_ssc)) {
+            e1_pass.innerHTML = "Enter Year Only"
+            isValid = false
+        }
+
+          var x = parseFloat(percentage_ssc);    
+            if (percentage_ssc === '') {
+                e1_per.innerHTML = "SSC Percentage is Required "
+                isValid = false
+            }
+            else if(isNaN(x) || x<0 || x>100)
+            {
+                e1_per.innerHTML = "Invalid Input"
+                isValid = false
+            }
+
+            var board_hsc = document.getElementById("board_hsc").value;
+            var pass_year_hsc = document.getElementById("pass_year_hsc").value;
+            var percentage_hsc = document.getElementById("percentage_hsc").value;
+            document.getElementById('e2_per').innerHTML = '';
+            document.getElementById('e2_pass').innerHTML = '';
+            document.getElementById('e2_bname').innerHTML = '';
+
+           if (board_hsc === '' || !/^[a-zA-Z a-zA-Z]+$/.test(board_hsc)) {
+                e2_bname.innerHTML = "Invalid Hsc Board Name"
+                isValid = false
+            }
+
+            if (!/^\d{4}$/.test(pass_year_hsc)) {
+                e2_pass.innerHTML = "Enter Hsc Passed Year Only"
+                isValid = false
+            }
+            var y = parseFloat(percentage_hsc);    
+            if (percentage_hsc === '') {
+                e2_per.innerHTML = "HSC Percentage is Required "
+                isValid = false
+            }
+            else if(isNaN(y) || y<0 || y>100)
+            {
+                e2_per.innerHTML = "Invalid Input for percentage"
+            }
+
+            var board_bach = document.getElementById("board_bach").value;
+            var pass_year_bach = document.getElementById("pass_year_bach").value;
+            var percentage_bach = document.getElementById("percentage_bach").value;
+            document.getElementById('e3_per').innerHTML = '';
+            document.getElementById('e3_pass').innerHTML = '';
+            document.getElementById('e3_bname').innerHTML = '';
+            if (board_bach === '' ||  !/^[a-zA-Z a-zA-Z]+$/.test(board_bach)) 
+            {
+                e3_bname.innerHTML = "Invalid Board/Course Name"
+                isValid = false
+            }
+           
+
+            if (!/^\d{4}$/.test(pass_year_bach)) {
+                e3_pass.innerHTML = "Enter Bachelor Passed Year Only"
+                isValid = false
+            }
+            var z = parseFloat(percentage_bach); 
+             if(isNaN(z) || z<0 || z>100)
+            {
+                e3_per.innerHTML = "Invalid Input for percentage"
+            }
     }
-
-    var designation = document.getElementById('designation').value;
-    document.getElementById('errDes').innerHTML = '';
-    if (designation === '') {
-        errDes.innerHTML = "Required Field"
-        isValid = false
-    }
-
-    var gender = document.querySelector('input[name="gender"]:checked')
-    document.getElementById('errGender').innerHTML = '';
-    if (!gender) {
-        errGender.innerHTML = "You must select your gender!"
-        isValid = false
-    }
-    
-    var phone_number = document.getElementById('phone_number').value;
-    document.getElementById('errNum').innerHTML = '';
-    if (phone_number === '') {
-        errNum.innerHTML = "Conatct Number is required field"
-        isValid = false
-    }
-    else if (!/^\d{10}$/.test(phone_number)) {
-    // else if (!/^\(([0-9]{4})\)?([0-9]{3})?([0-9]{3})$/.test(phone_number)) {
-        errNum.innerHTML = "Only 10 Digits are allowed"
-        isValid = true
-    }
-
-    if (email === '') {
-        errMail.innerHTML = "Email Is Required Field"
-        isValid = false
-    }
-    else if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        .test(email)) {
-            errMail.innerHTML = "Email Not Valid"
-        isValid = false
-    }
-
-    if (relationship === '') {
-        errRelation.innerHTML = "Select Any One Option"
-        isValid = false
-    }
-
-
-    if (zipcode === '') {
-        errZipcode.innerHTML = "Zipcode is Required Field"
-        isValid = false
-    }
-
-
-    var address = document.getElementById("address").value;
-    var city = document.getElementById("city").value;
-    var state = document.getElementById("state").value;
-    document.getElementById('errAdd').innerHTML = '';
-    document.getElementById('errCity').innerHTML = '';
-    document.getElementById('errState').innerHTML = '';
-    if (address === '') {
-        errAdd.innerHTML = "Required Field"
-        isValid = false
-    }
-    if (city === '') {
-        errCity.innerHTML = "Required Field"
-        isValid = false
-    }
-    if (state === '') {
-        errState.innerHTML = "Required Field"
-        isValid = false
-    }
-
-    var date_of_birth = document.getElementById("date_of_birth").value;
-    document.getElementById('errdob').innerHTML = '';
-    if (date_of_birth === '') {
-        errdob.innerHTML = "DOB Is Required Field"
-        isValid = false
-    }
-    else if (!/^\d{4}-\d{2}-\d{2}$/.test(date_of_birth)) {
-        errdob.innerHTML = "Invalid Date"
-        isValid = false
-    }
-
-    // Education Validation
-    // var board_ssc = document.getElementById("board_ssc").value;
-    // var pass_year_ssc = document.getElementById("pass_year_ssc").value;
-    // var percentage_ssc = document.getElementById("percentage_ssc").value;
-    // document.getElementById('e1_pass').innerHTML = '';
-    // document.getElementById('e1_bname').innerHTML = '';
-    // document.getElementById('e1_per').innerHTML = '';
-
-    // var hsc_bname = document.getElementById("hsc_bname").value;
-    // var hscpassyear = document.getElementById("hscpassyear").value;
-    // var hscresult = document.getElementById("hscresult").value;
-
-   
-    // document.getElementById('errHRes').innerHTML = '';
-
-    // document.getElementById('errSSCbname').innerHTML = '';
-    // document.getElementById('errHSCbname').innerHTML = '';
-    // console.log(ssc_bname);
-    
-
-    // if (board_ssc === '') {
-    //     e1_pass.innerHTML = "Required"
-    //     isValid = false
-    // }
-    // else if (!/^[a-zA-Z]+$/.test(board_ssc)) {
-    //     e1_pass.innerHTML = "Invalid Name"
-    //     isValid = false
-    // }
-
-    // if (!/^\d{4}$/.test(sscpassyear)) {
-    //     errPass.innerHTML = "Enter Year Only"
-    //     isValid = false
-    // }
-
-    // if (hsc_bname === '') {
-    //     errHSCbname.innerHTML = "Required"
-    //     isValid = false
-    // }
-    // else if (!/^[a-zA-Z]+$/.test(hsc_bname)) {
-    //     errHSCbname.innerHTML = "Invalid Name"
-    //     isValid = false
-    // }
-
-
-    // var x = parseFloat(sscresult);    var y = parseFloat(hscresult);
-    // if (sscresult === '') {
-    //     errRes.innerHTML = "Required"
-    //     isValid = false
-    // }
-    // else if(isNaN(x) || x<0 || x>100)
-    // {
-    //     errRes.innerHTML = "Invalid Input"
-    //     isValid = false
-    // }
-    // if (hscresult === '') {
-    //     errHRes.innerHTML = "Required"
-    //     isValid = false
-    // }
-    // else if(isNaN(x) || x<0 || x>100)
-    // {
-    //     errHRes.innerHTML = "Invalid Input"
-    //     isValid = false
-    // }
-
-
-    // if (!/^\d{4}$/.test(hscpassyear)) {
-    //     errHPass.innerHTML = "Enter Year Only"
-    //     isValid = false
-    // }
-
-    // var bcourse_name = document.getElementById("bcourse_name").value;
-    // document.getElementById('errbcourse').innerHTML = '';
-    // var bachpassyear = document.getElementById("bachpassyear").value;
-    // document.getElementById('errBPass').innerHTML = '';
-    // var bachresult = document.getElementById("bachresult").value;
-    // document.getElementById('errBResult').innerHTML = '';
-    // if(!/^[a-zA-Z]+$/.test(bcourse_name)) {
-    //     errbcourse.innerHTML = "Invalid Name"
-    //     isValid = false
-    // }
-    // if (!/^\d{4}$/.test(bachpassyear)) {
-    //     errBPass.innerHTML = "Enter Year Only"
-    //     isValid = false
-    // }
-    // var z = parseFloat(bachresult);
-    // if (bachresult === '') {
-    //     errBResult.innerHTML = "Required"
-    //     isValid = false
-    // }
-    // else if(isNaN(z) || z<0 || z>100)
-    // {
-    //     errBResult.innerHTML = "Invalid Input"
-    //     isValid = false
-    // }
 
     // work experience 
+    
+    if(curTab==2)
+    {
+        var com_name = document.getElementById("com_name").value;
+        document.getElementById('errComname').innerHTML = '';
+        var des = document.getElementById("des").value;
+        document.getElementById('errDes').innerHTML = '';
+        if (!/^[a-zA-Z a-zA-Z]+$/.test(com_name)) {
+            errComname.innerHTML = "Enter Valid Data"
+            isValid = false
+        }
+        if (!/^[a-zA-Z a-zA-Z]+$/.test(des)) {
+            errDes.innerHTML = "Enter Valid Data"
+            isValid = false
+        }
 
-    // var com_name = document.getElementById("com_name").value;
-    // document.getElementById('errComname').innerHTML = '';
-    // var des = document.getElementById("des").value;
-    // document.getElementById('errDes').innerHTML = '';
-    // if (!/^[a-zA-Z]+$/.test(com_name)) {
-    //     errComname.innerHTML = "Enter Valid Data"
-    //     isValid = false
-    // }
-    // if (!/^[a-zA-Z]+$/.test(des)) {
-    //     errDes1.innerHTML = "Enter Valid Data"
-    //     isValid = false
-    // }
+        var from = document.getElementById("from").value;
+        document.getElementById('errFrom').innerHTML = '';
+        var to = document.getElementById("to").value;
+        document.getElementById('errTo').innerHTML = '';
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(from)) {
+            errFrom.innerHTML = "Invalid Date"
+            isValid = false
+        }
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(to)) {
+            errTo.innerHTML = "Invalid Date"
+            isValid = false
+        }
+    }
+   
+    //  language validation
+    if(curTab==3)
+    {
+        var hindi = document.querySelectorAll('input[name="hindi"]:checked')
+        document.getElementById('errHindi').innerHTML = '';
+        if (hindi.length === 0) {
+            errHindi.innerHTML = "Select atleast one option!"
+            isValid = false
+        }
 
-    // var from = document.getElementById("from").value;
-    // document.getElementById('errFrom').innerHTML = '';
-    // var to = document.getElementById("to").value;
-    // document.getElementById('errTo').innerHTML = '';
-    // if (!/^\d{4}-\d{2}-\d{2}$/.test(from)) {
-    //     errFrom.innerHTML = "Invalid Date"
-    //     isValid = false
-    // }
-    // if (!/^\d{4}-\d{2}-\d{2}$/.test(to)) {
-    //     errTo.innerHTML = "Invalid Date"
-    //     isValid = false
-    // }
+        var english = document.querySelectorAll('input[name="english"]:checked')
+        document.getElementById('errEng').innerHTML = '';
+        if (english.length === 0) {
+            errEng.innerHTML = "Select atleast one option!"
+            isValid = false
+        }
+
+        var gujarati = document.querySelectorAll('input[name="gujarati"]:checked')
+        document.getElementById('errGuj').innerHTML = '';
+        if (gujarati.length === 0) {
+            errGuj.innerHTML = "Select atleast one option!"
+            isValid = false
+        }
+    }
+
+    if(curTab==5)
+    {
+        var ref_name = document.getElementById("ref_name").value;
+        document.getElementById('errRefname').innerHTML = '';
+        if (!/^[a-zA-Z a-zA-Z]+$/.test(ref_name)) {
+            errRefname.innerHTML = "Enter Valid Name"
+            isValid = false
+        }
+        var relation_name = document.getElementById("relation_name").value;
+        document.getElementById('errRefRel').innerHTML = '';
+        if (!/^[a-zA-Z a-zA-Z]+$/.test(relation_name)) {
+            errRefRel.innerHTML = "Enter Valid Name"
+            isValid = false
+        }
+        var contact_name = document.getElementById("contact_name").value;
+        document.getElementById('errRefCon').innerHTML = '';
+        if (!/^\(?([0-9]{2})\)?([0-9]{4})?([0-9]{4})$/.test(contact_name)) {
+            errRefCon.innerHTML = "Only 10 Digits are allowed"
+            isValid = false
+        }
+    }
+
+    // PREF Validation
+    
+    if(curTab==6)
+    {
+        var curCTC = document.getElementById("curCTC").value;
+        document.getElementById('errCur').innerHTML = '';
+        if (!/^\d{5}$/.test(curCTC)) {
+            errCur.innerHTML = "Enter Digits Only"
+            isValid = false
+        }
+
+        var expCTC = document.getElementById("expCTC").value;
+        document.getElementById('errEx').innerHTML = '';
+        if (!/^\d{5}$/.test(expCTC)) {
+            errEx.innerHTML = "Enter Digits Only"
+            isValid = false
+        }
 
 
+        // var notice = document.getElementById("notice").value;
+        // document.getElementById('errNotice').innerHTML = '';
+        // if (!/^\d{2}$/.test(notice)) {
+        //     errNotice.innerHTML = "Enter Number Of Month Only"
+        //     isValid = false
+        // }
 
-    // var hindi = document.querySelectorAll('input[name="hindi"]:checked')
-    // document.getElementById('errHindi').innerHTML = '';
-    // if (hindi.length === 0) {
-    //     errHindi.innerHTML = "Select atleast one option!"
-    //     isValid = false
-    // }
+        var department = document.getElementById("department").value;
+        document.getElementById('errDep').innerHTML = '';
+        if (department === '') {
+            errDep.innerHTML = "Select Any One Option"
+            isValid = false
+        }
 
-    // var english = document.querySelectorAll('input[name="english"]:checked')
-    // document.getElementById('errEng').innerHTML = '';
-    // if (english.length === 0) {
-    //     errEng.innerHTML = "Select atleast one option!"
-    //     isValid = false
-    // }
-
-    // var gujarati = document.querySelectorAll('input[name="gujarati"]:checked')
-    // document.getElementById('errGuj').innerHTML = '';
-    // if (gujarati.length === 0) {
-    //     errGuj.innerHTML = "Select atleast one option!"
-    //     isValid = false
-    // }
-
-
-    // var ref_name = document.getElementById("ref_name").value;
-    // document.getElementById('errRefname').innerHTML = '';
-    // if (!/^[a-zA-Z]+$/.test(ref_name)) {
-    //     errRefname.innerHTML = "Enter Valid Name"
-    //     isValid = false
-    // }
-    // var relation_name = document.getElementById("relation_name").value;
-    // document.getElementById('errRefRel').innerHTML = '';
-    // if (!/^[a-zA-Z]+$/.test(relation_name)) {
-    //     errRefRel.innerHTML = "Enter Valid Name"
-    //     isValid = false
-    // }
-    // var contact_name = document.getElementById("contact_name").value;
-    // document.getElementById('errRefCon').innerHTML = '';
-    // if (!/^\(?([0-9]{2})\)?([0-9]{4})?([0-9]{4})$/.test(contact_name)) {
-    //     errRefCon.innerHTML = "Only 10 Digits are allowed"
-    //     isValid = false
-    // }
-
-    // var curCTC = document.getElementById("curCTC").value;
-    // document.getElementById('errCur').innerHTML = '';
-    // if (!/^\d{5}$/.test(curCTC)) {
-    //     errCur.innerHTML = "Enter Digits Only"
-    //     isValid = false
-    // }
-
-    // var expCTC = document.getElementById("expCTC").value;
-    // document.getElementById('errEx').innerHTML = '';
-    // if (!/^\d{5}$/.test(expCTC)) {
-    //     errEx.innerHTML = "Enter Digits Only"
-    //     isValid = false
-    // }
-
-    // var expCTC = document.getElementById("expCTC").value;
-    // document.getElementById('errEx').innerHTML = '';
-    // if (!/^\d{5}$/.test(expCTC)) {
-    //     errEx.innerHTML = "Enter Digits Only"
-    //     isValid = false
-    // }
-
-    // var notice = document.getElementById("notice").value;
-    // document.getElementById('errNotice').innerHTML = '';
-    // if (!/^\d{2}$/.test(notice)) {
-    //     errNotice.innerHTML = "Enter Number Of Month Only"
-    //     isValid = false
-    // }
-
-    // if (department === '') {
-    //     errDep.innerHTML = "Select Any One Option"
-    //     isValid = false
-    // }
-
-    // if (location === '') {
-    //     errLoc.innerHTML = "Select Any One Option"
-    //     isValid = false
-    // }
-
+        var location = document.getElementById("location").value;
+        document.getElementById('errLoc').innerHTML = '';
+        if (location === '') {
+            errLoc.innerHTML = "Select Any One Option"
+            isValid = false
+        }
+    }
 
     return isValid;
 }
