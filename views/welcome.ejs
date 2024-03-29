@@ -2,17 +2,16 @@
 <head>
     <title>Welcome Page - All Task</title>
     <style>
-       td{border: 1px solid black;padding: 10px;margin: 10px;text-align: center;}
+       td{border: 1px solid black;padding: 10px;margin: 10px;text-align: center;border-radius: 7px;}
         a{text-decoration: none;color: black;}
         table{padding-top: 20px;}
-        .title{color: darkcyan;font-weight: bold;}
-        
+        .title{color: darkcyan;font-weight: bold; background-color: azure;border-radius: 10px;}
+        .allTask{margin-left: 30px;}
     </style>
 </head>
 
 <body>
-   
-
+    <div class="allTask">
     <table>
         <tr>
             <td colspan="2" class="title">JavaScript Exe..</td>
@@ -53,10 +52,11 @@
 
     <table>
         <tr>
-            <td colspan="2" class="title">JOB APP Crud..</td>
+            <td colspan="2" class="title">JOB APP Crud[ Insert + Update ]</td>
         </tr>
         <tr>
-            <td><a href="/formValid">Without Ajax [ Insert + Update ]</a></td>
+            <td><a href="/formValid">Without Ajax</a></td>
+            <td><a href="/formAjax">With Ajax </a></td>
         </tr>
     </table>
 
@@ -70,7 +70,7 @@
             <td><a href="/cityState">City-State [Ajax Drpdown]</a></td>
         </tr>
     </table>
-
+</div>
 
 </body>
 

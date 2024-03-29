@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <style>
+            a{text-decoration: none;}
+            td{text-align: center;}
+        </style>
+    </head>
+    <body><h1>Your Details</h1>
+        <table border="1" style="height: 30%; width: 70%;">
+            <tr><th>Employee ID</th>
+                <th>First Name</th><th>Last Name</th><th>Contact</th>
+                <th>Mail ID</th><th>Action</th>
+            </tr>
+            <tr>
+                <% result.forEach(stu => {%>
+                    <td> <%= stu.emp_id %></td>
+                    <td> <%= stu.f_name %></td>
+                    <td> <%= stu.l_name %></td>
+                    <td> <%= stu.designation %></td>
+                    <td> <%= stu.email %></td>
+                    <td> 
+                        <a href="/submitDataAjax/<%=stu.emp_id%>">Update Record</a>
+                    </td> 
+                </tr>
+                <% }); %>
+    </table>
+    </body>
+</html>

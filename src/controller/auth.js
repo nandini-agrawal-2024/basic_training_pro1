@@ -368,7 +368,7 @@ const getStudentSort = async(req,res) =>{
 
   // console.log(page);
 
-  const query = `select * from studentMaster order by first_name ${order} limit ${limit} offset ${offset}`
+  const query = `select * from studentMaster order by stu_id ${order} limit ${limit} offset ${offset}`
   con.query( query , (err,result,fields) => 
   {
     if(err) throw err;
