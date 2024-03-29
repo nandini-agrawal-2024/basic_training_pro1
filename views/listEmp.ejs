@@ -1,0 +1,29 @@
+<!-- display all students record -->
+<html>
+    <body>
+        <h1>Your Data</h1>
+        <%for(let i=0;i<result.length; i++){%>
+            <p><%= result[i].f_name %></p>
+            <p><%= result[i].l_name %></p>
+            <p><%= result[i].designation %></p>
+            <p><%= result[i].email %></p>
+            <p><%= result[i].phone_number %></p>
+            <p><%= result[i].gender %></p>
+            <p><%= result[i].relation %></p>
+            <p><%= result[i].address_1 %></p>
+            <p><%= result[i].address_2 %></p>
+            <p><%= result[i].zipcode %></p>
+            <p><%= result[i].city %></p>
+            <p><%= result[i].state %></p>
+            <p><%= result[i].dob %></p>
+       
+            <a href="/submitData/<%=result[i].emp_id%>">
+            <input type="button" value="Open Update Form">
+            </a>
+        <%}%>
+
+                
+
+    </table>
+    </body>
+</html>
