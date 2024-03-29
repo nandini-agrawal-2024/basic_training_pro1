@@ -88,14 +88,10 @@ const newTokencreate = async(req,res) => {
     let updateeActive = genSalt(12);
     const updateData = await con.promise().query('update registration set activation_key = ?,created_at = now() where activation_key=?', [updateeActive,activation_key])
     res.send(`<div style="background-color: aliceblue;
-    padding: 30px;
-    border: 1px solid black;
-    border-radius: 10px;
-    width: 30%;
-    margin: auto;
-      margin-top: auto;
-    margin-top: 70;
-    text-align: center";>
+    padding: 30px;border: 1px solid black;
+    border-radius: 10px;width: 30%;
+    margin: auto;margin-top: auto;
+    margin-top: 70;text-align: center";>
     <a href="http://localhost:6009/password/?reg_id=${result.reg_id}&activation_key=${updateeActive}" 
     style="font-size:20px;margin:50px;color:black">Click To Generate New Password</a></div>`)
   }
