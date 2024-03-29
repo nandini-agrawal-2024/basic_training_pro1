@@ -76,6 +76,35 @@ const postSignUp = async (req,res) =>
  
 };
 
+const newTokencreate = async(req,res) => {
+  try{
+    const {activation_key} = req.query;
+    const issue = await con.promise().query('select * from registration where activation_key = ? ',[activation_key])
+    result = issue[0][0];
+    console.log(result);
+    
+    if(issue[0].length === 0)
+      return res.send("token invalid");
+    let updateeActive = genSalt(12);
+    const updateData = await con.promise().query('update registration set activation_key = ?,created_at = now() where activation_key=?', [updateeActive,activation_key])
+    res.send(`<div style="background-color: aliceblue;
+    padding: 30px;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 30%;
+    margin: auto;
+      margin-top: auto;
+    margin-top: 70;
+    text-align: center";>
+    <a href="http://localhost:6009/password/?reg_id=${result.reg_id}&activation_key=${updateeActive}" 
+    style="font-size:20px;margin:50px;color:black">Click To Generate New Password</a></div>`)
+  }
+  
+  catch(err)
+  {
+    console.log(err);
+  }
+}
 
 const getPass = async(req,res) => 
 { 
@@ -584,6 +613,8 @@ const getCities =  async(req,res) => {
 
 module.exports = 
 {
+  newTokencreate,
+
   getStart,getIndex,
   postSignUp,getSignUp,
   postPass,getPass,
@@ -608,8 +639,7 @@ module.exports =
 
   getSortCols,
 
-  getPosts,getIdPost,
+  getPosts,getIdPost
 
-  // getJobForm,postInsertJob
-}
+  }
   
