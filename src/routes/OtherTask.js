@@ -4,12 +4,11 @@ var express = require("express")
 const con = require('../config/connect')
 
 const login = express.Router();
-const 
-{
+const {
     cityStateget,getSates,getCities,
     timeZoneget,
     kukucubeget,dynamic_tableget,tictacget,sortAlgget,jsEventsget,jobAppget,
-} = require('../controller/auth')
+} = require('../controller/jsTask')
 
 
 login.route("/kukucube").get(kukucubeget);

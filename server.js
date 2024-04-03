@@ -25,6 +25,5 @@ app.use("/",jobappAjax);
 app.use("/",OtherTask);
 app.use("/",nodeTask);
 
-
 app.listen(6009) 
 console.log(6009)
