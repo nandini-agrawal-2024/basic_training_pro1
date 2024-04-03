@@ -2,10 +2,10 @@ var express = require("express")
 const con = require('../config/connect')
 
 const login = express.Router();
-// without ajax
-const{getJobForm, postJobForm, getEmpData, updateFormPost} = require('../controller/JobApp')
-// with ajax
-const{getAjaxForm, postJobFormAjax, getEmpAjax, updateFormAjaxPost} = require('../controller/JobAppAjax')
+// Job Crud without ajax
+const { getJobForm, postJobForm, getEmpData, updateFormPost } = require('../controller/JobApp')
+// Job crud with ajax
+const { getAjaxForm, postJobFormAjax, getEmpAjax, updateFormAjaxPost } = require('../controller/JobAppAjax')
 
 login.route("/formValid").get(getJobForm);
 login.route("/submitData").post(postJobForm);

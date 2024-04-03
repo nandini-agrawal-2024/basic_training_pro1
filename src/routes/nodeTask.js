@@ -4,15 +4,15 @@ var express = require("express")
 const con = require('../config/connect')
 
 const login = express.Router();
-const 
-{
-    getAtt,getMysqlTableGen,
-    getResultGrid,getReportResult,getAttResult,
-    getStudentSort,
-    getSearchDel,getSearchID,
-    getSortCols,
-    getPosts,getIdPost
-} = require('../controller/auth')
+const
+    {
+        getAtt, getMysqlTableGen,
+        getResultGrid, getReportResult, getAttResult,
+        getStudentSort,
+        getSearchDel, getSearchID,
+        getSortCols,
+        getPosts, getIdPost
+    } = require('../controller/nodeEx')
 
 
 login.route("/att").get(getAtt);

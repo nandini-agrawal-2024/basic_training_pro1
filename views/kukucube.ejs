@@ -1,152 +1,140 @@
 <html>
-    <head>
-        <header>Nandini Agrawal</header>
-        <header>
-            JS Task 2 : Kuku Cube
-        </header>
-        <header>    
+<head>
+    <style>
+        .timecount {
+            font-size: 15px;
+        }
+
+        .scoreID {
+            font-size: 15px;
+        }
+
+        header {
+            font-size: 15px;
+        }
+
+        body {
+            margin: 25px 50px;
+            background-color: white;
+        }
+
+        table {
+            margin: 100px;
+            table-layout: fixed;
+            width: 40%;
+            height: 40%;
+            border: 1px solid whitesmoke;
+        }
+
+        td {
+            text-align: center;
+            border: 1px solid whitesmoke;
+            padding: 20px;
+        }
+    </style>
+    <header>Nandini Agrawal<br>
+        JS Task 2 : Kuku Cube<br>
         Employee ID : 24DEV075
-        </header>
-        <div id="timecount">: Left Time</div>
-        <div id="scoreID">: Your Score</div>
-        <style>
-            .timecount{font-size: 15px;} .scoreID{font-size: 15px;}
-            header 
-            {
-                font-size: 15px;
-            }
-            body
-            {
-                margin: 25px 50px;
-                background-color: white;
-            }
-            table
-            {
-                margin: 100px;
-                table-layout: fixed;
-                width: 40%;
-                height: 40%;
-                border: 1px solid whitesmoke;
-            }
-            
-            td
-            {
-               text-align: center;
-               border: 1px solid whitesmoke;
-               padding: 20px;
-            }
-        </style>
-        <script>
-            function playGame()
-            {
-                addnewrow();
-                addmoreColumns();
-                addtable();
-                modifyColor()
-                scoreTotal++;
-                document.getElementById("scoreID").innerHTML="Your Score " + scoreTotal + "!!";
-            }
+    </header>
 
-            function addtable()
-            {
-                var t1 = document.getElementById("t1"); 
-                var tdcell = t1.getElementsByTagName("td")
-                var randomValue = Math.floor(Math.random()*(tdcell.length-0));
-                
-                const colorChange = modifyColor();
+    <div id="timecount">: Left Time</div>
+    <div id="scoreID">: Your Score</div>
 
-                for(var i=0;i<tdcell.length;i++)
-                {
-                    if(i===randomValue)
-                    {
-                        // tdcell[i].style.backgroundColor = "darkgray"
-                        tdcell[i].style.backgroundColor = 'rgb(' + colorChange.red + ',' + colorChange.green + ',' + colorChange.blue + ')';
-                        tdcell[i].style.opacity="0.3";
-                    }
-                    else
-                    {
-                        // tdcell[i].style.backgroundColor = "darkgray"
-                        tdcell[i].style.backgroundColor = 'rgb(' + colorChange.red + ',' + colorChange.green + ',' + colorChange.blue + ')';
-                        tdcell[i].removeEventListener("click",playGame);
-                        tdcell[i].style.opacity="1";
-                    }
+    <script>
+        function playGame() {
+            addnewrow();
+            addmoreColumns();
+            addtable();
+            modifyColor()
+            scoreTotal++;
+            document.getElementById("scoreID").innerHTML = "Your Score " + scoreTotal + "!!";
+        }
+
+        function addtable() {
+            var t1 = document.getElementById("t1");
+            var tdcell = t1.getElementsByTagName("td")
+            var randomValue = Math.floor(Math.random() * (tdcell.length - 0));
+
+            const colorChange = modifyColor();
+
+            for (var i = 0; i < tdcell.length; i++) {
+                if (i === randomValue) {
+                    tdcell[i].style.backgroundColor = 'rgb(' + colorChange.red + ',' + colorChange.green + ',' + colorChange.blue + ')';
+                    tdcell[i].style.opacity = "0.3";
                 }
-                tdcell[randomValue].addEventListener("click",playGame)
-            }
-
-            var scoreTotal = "";
-
-            function addnewrow()
-            {
-                var tableid = document.getElementById("t1");
-                var rowsCount = document.getElementById("row1").cells.length;
-                var rows = tableid.insertRow();
-                for(i=0;i<rowsCount;i++)
-                {
-                    rows.insertCell();
+                else {
+                    tdcell[i].style.backgroundColor = 'rgb(' + colorChange.red + ',' + colorChange.green + ',' + colorChange.blue + ')';
+                    tdcell[i].removeEventListener("click", playGame);
+                    tdcell[i].style.opacity = "1";
                 }
             }
+            tdcell[randomValue].addEventListener("click", playGame)
+        }
 
-            function modifyColor()
-            {
-                var red = Math.floor(Math.random()*(255-0+1));
-                var green = Math.floor(Math.random()*(255-0+1));
-                var blue = Math.floor(Math.random()*(255-0+1));
+        var scoreTotal = "";
 
-                return {red,green,blue}
+        function addnewrow() {
+            var tableid = document.getElementById("t1");
+            var rowsCount = document.getElementById("row1").cells.length;
+            var rows = tableid.insertRow();
+            for (i = 0; i < rowsCount; i++) {
+                rows.insertCell();
             }
+        }
 
-            function addmoreColumns()
-            {
-                var newtableid = document.getElementById('t1');
-                for(i=0;i<newtableid.rows.length;i++)
-                {
-                    var addcell = newtableid.rows[i].insertCell(newtableid.rows[i].cells.length)
-                }
+        function modifyColor() {
+            var red = Math.floor(Math.random() * (255 - 0 + 1));
+            var green = Math.floor(Math.random() * (255 - 0 + 1));
+            var blue = Math.floor(Math.random() * (255 - 0 + 1));
+
+            return { red, green, blue }
+        }
+
+        function addmoreColumns() {
+            var newtableid = document.getElementById('t1');
+            for (i = 0; i < newtableid.rows.length; i++) {
+                var addcell = newtableid.rows[i].insertCell(newtableid.rows[i].cells.length)
             }
-            
-            var totalTime = 20;
-            var newTimer = setInterval(function()
-            {
-                if(totalTime <= 0)
-                {
-                    clearTimeout(newTimer)
-                    document.getElementById("timecount").innerHTML="over"
-                    document.getElementsByTagName("body")[0].innerHTML=`<h3 style=font-size:15px">Your Highest Score: ${scoreTotal}</h3>`
-                    let button = document.createElement("button")
-                    button.innerHTML = "Restart Game";
-                    button.style.marginLeft= "50%"; 
-                    button.style.fontSize="20px";
-                    document.body.style.backgroundColor="lightgreen";
-                    document.body.style.fontSize="20px";
-                    
-                    button.addEventListener("click",function()
-                    {
-                        window.location.reload()
-                    })
-                    document.getElementsByTagName("body")[0].appendChild(button)
-                    }
-                    else
-                    {
-                        document.getElementById("timecount").innerHTML = totalTime;
-                    }
-                    totalTime -= 1;
-            }, 1000)
-            
-            
-        </script>
-    </head>
-    <body onload="addtable()">
-        <table id="t1">
-            <tr id="row1">
-                 <td></td>
-                <td></td>
-            </tr>
+        }
 
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
-    </body>
+        var totalTime = 20;
+        var newTimer = setInterval(function () {
+            if (totalTime <= 0) {
+                clearTimeout(newTimer)
+                document.getElementById("timecount").innerHTML = "over"
+                document.getElementsByTagName("body")[0].innerHTML = `<h3 style=font-size:15px">Your Highest Score: ${scoreTotal}</h3>`
+                let button = document.createElement("button")
+                button.innerHTML = "Restart Game";
+                button.style.marginLeft = "50%";
+                button.style.fontSize = "20px";
+                document.body.style.backgroundColor = "lightgreen";
+                document.body.style.fontSize = "20px";
+
+                button.addEventListener("click", function () {
+                    window.location.reload()
+                })
+                document.getElementsByTagName("body")[0].appendChild(button)
+            }
+            else {
+                document.getElementById("timecount").innerHTML = totalTime;
+            }
+            totalTime -= 1;
+        }, 1000)
+    </script>
+</head>
+
+<body onload="addtable()">
+    <table id="t1">
+        <tr id="row1">
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+
 </html>

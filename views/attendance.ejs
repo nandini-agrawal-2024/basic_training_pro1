@@ -25,21 +25,21 @@
                         <td>
                             <%= parseFloat((result[i].Present_Day/31)*100).toFixed(2) %> %</td>
                         </td>
-                        <% } %>
+                    <% } %>
 
-                        <% if(m==1){%>
-                            <td>
-                                <%= parseFloat((result[i].Present_Day/31)*100).toFixed(2) %> %</td>
-                            </td>
-                            <% } %>
+                    <% if(m==1){%>
+                        <td>
+                            <%= parseFloat((result[i].Present_Day/31)*100).toFixed(2) %> %</td>
+                        </td>
+                    <% } %>
 
-                        <% if(m==2){%>
-                            <td>
-                                <%= parseFloat((result[i].Present_Day/29)*100).toFixed(2) %> %</td>
-                            </td>
-                            <% } %>
+                    <% if(m==2){%>
+                        <td>
+                            <%= parseFloat((result[i].Present_Day/29)*100).toFixed(2) %> %</td>
+                        </td>
+                    <% } %>
                 </tr>
-                <% } %>
+            <% } %>
         </tbody>
     </table>
 </body>

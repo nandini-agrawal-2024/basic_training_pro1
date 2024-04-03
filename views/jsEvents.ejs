@@ -1,213 +1,230 @@
 <html>
-    <header>Nandini Agrawal</header>
-    <header>
-        JS Events
-    </header>
-    <header>    
+<header>Nandini Agrawal</header>
+<header>
+    JS Events
+</header>
+<header>
     Employee ID : 24DEV075
-    </header>
-    <head>
-        <style>
-            body{height: 1500px;}
-            header{display: block;}
-            table{border: 1;width: 300px;border-collapse: collapse;height: 60%;align-content: center; 
-                table-layout: fixed;position: static;  text-align: center;}
-            input{width: 40%;padding: auto;}
-            .center{margin: 5px 5px 5px 5px;}
-            td.white{background-color: bisque;}
-            td{width: 150px;height: 40px;box-sizing: border-box;padding: 8px;overflow: hidden;}
-            td.gray{background-color: gray;color: white;}
-            .scrollChk{background-color: aquamarine;}
-        </style>
+</header>
 
-        <script>
-           function onblurFunc()
-           {
-                const e1 = document.getElementById('event1')
-                e1.value = e1.value.toUpperCase();
-                alert('onClick Event');
-           }
+<head>
+    <style>
+        body {
+            height: 1500px;
+        }
 
-           function course() 
-           {
-                prefer = document.getElementById('courselist').value;
-                alert("Your course is " + prefer);
-            }
+        header {
+            display: block;
+        }
 
-            function selectFun()
-            {
-                document.getElementById('event3').innerHTML = 
+        table {
+            border: 1;
+            width: 300px;
+            border-collapse: collapse;
+            height: 60%;
+            align-content: center;
+            table-layout: fixed;
+            position: static;
+            text-align: center;
+        }
+
+        input {
+            width: 40%;
+            padding: auto;
+        }
+
+        .center {
+            margin: 5px 5px 5px 5px;
+        }
+
+        td.white {
+            background-color: bisque;
+        }
+
+        td {
+            width: 150px;
+            height: 40px;
+            box-sizing: border-box;
+            padding: 8px;
+            overflow: hidden;
+        }
+
+        td.gray {
+            background-color: gray;
+            color: white;
+        }
+
+        .scrollChk {
+            background-color: aquamarine;
+        }
+    </style>
+
+    <script>
+        function onblurFunc() {
+            const e1 = document.getElementById('event1')
+            e1.value = e1.value.toUpperCase();
+            alert('onClick Event');
+        }
+
+        function course() {
+            prefer = document.getElementById('courselist').value;
+            alert("Your course is " + prefer);
+        }
+
+        function selectFun() {
+            document.getElementById('event3').innerHTML =
                 "selected text";
-            }
+        }
 
-            function submitFunc()
-            {
-                namee = document.getElementById('namee').value;
-                alert(namee + "Redirecting to your url" )
-            }
+        function submitFunc() {
+            namee = document.getElementById('namee').value;
+            alert(namee + "Redirecting to your url")
+        }
 
-            function onresetFunc()
-            {
-                alert("Reset Form Event")
-            }
+        function onresetFunc() {
+            alert("Reset Form Event")
+        }
 
-            function keydownFunc()
-            {
-                alert('you pressed down a key')
-            }
+        function keydownFunc() {
+            alert('you pressed down a key')
+        }
 
-            function keypressFunc()
-            {
-                alert("key pressed inside a input box")
-            }
+        function keypressFunc() {
+            alert("key pressed inside a input box")
+        }
 
-            function keyupFunc() 
-            {
-                const d1 = document.getElementById("e1");
-                d1.value = d1.value.toUpperCase();
-            }
+        function keyupFunc() {
+            const d1 = document.getElementById("e1");
+            d1.value = d1.value.toUpperCase();
+        }
 
-            function clickFunc()
-            {
-                document.getElementById('click1').innerHTML="Click Event Called";
-            }
+        function clickFunc() {
+            document.getElementById('click1').innerHTML = "Click Event Called";
+        }
 
-            function dblckickFunc()
-            {
-                document.getElementById('click2').innerHTML="Double Click Event Called";
-            }
+        function dblckickFunc() {
+            document.getElementById('click2').innerHTML = "Double Click Event Called";
+        }
 
-            function mouseOverOutFunc()
-            {
-                alert("mouse over event")
-            }
+        function mouseOverOutFunc() {
+            alert("mouse over event")
+        }
 
-            function pageloadFunc()
-            {
-                alert('Page is loaded')
-            }  
-            
-            function imgErrFunc()
-            {
-                alert("Image couldn't be loaded")
-            }
+        function pageloadFunc() {
+            alert('Page is loaded')
+        }
 
-            function mOver(o)
-            {
-                o.innerHTML = "Software"
-            }
-            function mOut(o)
-            {
-                o.innerHTML = "Developer"
-            }
+        function imgErrFunc() {
+            alert("Image couldn't be loaded")
+        }
 
-            function handleerrFunc()
-            {
-                const m1 = document.getElementById('')
-            }
+        function mOver(o) {
+            o.innerHTML = "Software"
+        }
+        function mOut(o) {
+            o.innerHTML = "Developer"
+        }
 
-            function copyFunc()
-            {
-                document.getElementById('copy1').innerHTML
-                ="copy event called";
-            }
+        function handleerrFunc() {
+            const m1 = document.getElementById('')
+        }
 
-            window.addEventListener('online',onlineFunc)
-            window.addEventListener('offline',offlineFunc)
+        function copyFunc() {
+            document.getElementById('copy1').innerHTML
+                = "copy event called";
+        }
 
-            function onlineFunc()
-            {
-                document.addEventListener('status').innerHTML="you are online"
-            }
-           
-            function offlineFunc()
-            {
-                document.addEventListener('status').innerHTML="you are offline"
-                
-            }
+        window.addEventListener('online', onlineFunc)
+        window.addEventListener('offline', offlineFunc)
 
-        </script>
-    </head>
+        function onlineFunc() {
+            document.addEventListener('status').innerHTML = "you are online"
+        }
+
+        function offlineFunc() {
+            document.addEventListener('status').innerHTML = "you are offline"
+
+        }
+
+    </script>
+</head>
+
 <body onload="pageloadFunc()">
     <form onsubmit="submitFunc()" action="/home/nandini-agrawal/nandini_agr/js/jobApp">
-    <table class="center">
-    <tr>
-        <td class="white">
-            onblur Event            
-            <input type="text" placeholder="Enter Name" id="event1" onblur="onblurFunc()">
-        </td>
-        <td class="gray">
-            onchange [Dropdown Menu]
-            <select id="courselist" onchange="course(this)">
-                <option value="Mscit">Mscit</option>
-                <option value="b.tech">B.Tech</option>
-                <option value="m.tech">M.Tech</option>
-                <option value="mca">Mca</option>
-            </select>
-        </td>
-        <td class="white">
-            onselect Event
-            <input type="text" value="nandini agrawal" onselect="selectFun()">
-            <p id="event3"></p>
-        </td>
-        <td class="gray">onsubmit Event
-            <input type="text" id="namee" size="10">
-            <input type="submit">
-        </td>
-        <td class="white">onreset Event
-            <input type="text" placeholder="Your Name" value="Nandini Agrawal" size="20">
-            <input type="reset">
-        </td>
-    </tr>
+        <table class="center">
+            <tr>
+                <td class="white">
+                    onblur Event
+                    <input type="text" placeholder="Enter Name" id="event1" onblur="onblurFunc()">
+                </td>
+                <td class="gray">
+                    onchange [Dropdown Menu]
+                    <select id="courselist" onchange="course(this)">
+                        <option value="Mscit">Mscit</option>
+                        <option value="b.tech">B.Tech</option>
+                        <option value="m.tech">M.Tech</option>
+                        <option value="mca">Mca</option>
+                    </select>
+                </td>
+                <td class="white">
+                    onselect Event
+                    <input type="text" value="nandini agrawal" onselect="selectFun()">
+                    <p id="event3"></p>
+                </td>
+                <td class="gray">onsubmit Event
+                    <input type="text" id="namee" size="10">
+                    <input type="submit">
+                </td>
+                <td class="white">onreset Event
+                    <input type="text" placeholder="Your Name" value="Nandini Agrawal" size="20">
+                    <input type="reset">
+                </td>
+            </tr>
 
-    <tr>
-        <td class="gray">onkeydown Event
-            <input type="text" onkeydown="keydownFunc()">
-        </td>
-        <td class="white">onkeypress Event
-            <input type="text" onkeypress="keypressFunc()">
-        </td>
-        <td class="gray">onkeyup Event
-            <input type="text" id="e1" onkeyup="keyupFunc()">
-        </td>
-        <td class="white">onclick Event
-           <button onclick="clickFunc()">Click Here</button>
-        </td>
-        <td class="gray">onchange Event
-            <h4 id="click2" ondblclick="dblckickFunc()">Click on the text to trigger the event</h4>
-        </td>
-    </tr>
+            <tr>
+                <td class="gray">onkeydown Event
+                    <input type="text" onkeydown="keydownFunc()">
+                </td>
+                <td class="white">onkeypress Event
+                    <input type="text" onkeypress="keypressFunc()">
+                </td>
+                <td class="gray">onkeyup Event
+                    <input type="text" id="e1" onkeyup="keyupFunc()">
+                </td>
+                <td class="white">onclick Event
+                    <button onclick="clickFunc()">Click Here</button>
+                </td>
+                <td class="gray">onchange Event
+                    <h4 id="click2" ondblclick="dblckickFunc()">Click on the text to trigger the event</h4>
+                </td>
+            </tr>
 
-    <tr>
-        <td class="white">
-            <h4 onmouseover=
-            "style.color='blue'" onmouseout="style.color='black'">onmouseover/out Event
-        </h4>
-        </td>
-        
-        <td class="gray">onerror Event [Image]
-            <img src="i1.jpg" onerror="imgErrFunc()">
-        </td>
-        <td class="white">
-            <div onmouseover="mOver(this)" onmouseout="mOut(this)" 
-            style="background-color:cadetblue;
-            width:30px;
-            height:30px;
-            padding:30px;">
-            hover the mouse here</div>
-        </td>
-        <td class="gray">oncopy Event
-            <input type="text" oncopy="copyFunc()" value="copy this text..">
-            <p id="copy1"></p>
-        </td>
-        <td class="white">
-            <p id="status">Onlin Offline Status</p>
-        </td>
-    </tr>
+            <tr>
+                <td class="white">
+                    <h4 onmouseover="style.color='blue'" onmouseout="style.color='black'">onmouseover/out Event
+                    </h4>
+                </td>
 
-    
-</form>
-</table>
+                <td class="gray">onerror Event [Image]
+                    <img src="i1.jpg" onerror="imgErrFunc()">
+                </td>
+                <td class="white">
+                    <div onmouseover="mOver(this)" onmouseout="mOut(this)" style="background-color:cadetblue;width:30px;height:30px;padding:30px;">
+                        hover the mouse here</div>
+                </td>
+                <td class="gray">oncopy Event
+                    <input type="text" oncopy="copyFunc()" value="copy this text..">
+                    <p id="copy1"></p>
+                </td>
+                <td class="white">
+                    <p id="status">Onlin Offline Status</p>
+                </td>
+            </tr>
+
+
+    </form>
+    </table>
 
 </body>
+
 </html>

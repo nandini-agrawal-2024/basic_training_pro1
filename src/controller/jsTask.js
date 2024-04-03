@@ -35,7 +35,6 @@ const timeZoneget = async (req, res) => {
     res.render('timeZone')
 }
 
-
 const cityStateget = async (req, res) => {
     res.render('cityState')
 };
@@ -51,6 +50,7 @@ const getSates = async (req, res) => {
         res.send(err)
     }
 }
+
 const getCities = async (req, res) => {
     try {
         sql2 = `select * from city_master where state_id = ${req.params.state}`;
@@ -61,7 +61,6 @@ const getCities = async (req, res) => {
         res.send(err)
     }
 }
-
 
 module.exports = {
     cityStateget, getSates, getCities,

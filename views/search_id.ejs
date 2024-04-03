@@ -48,7 +48,6 @@
 
 
         <table border="1">
-           
             <tr><th>Student ID</th>
                 <th>Student Name</th>
                 <th>Choosen Course</th>
@@ -59,8 +58,6 @@
 
             </tr>
 
-
-           
         <form method="post">
             
             <% for(let i=0; i<result.length;i++){%>
@@ -76,11 +73,15 @@
             <% } %>
 
             <div>
+                <% if(Number(page)!=1) {%>
                 <a href="/searchID?page=1" <%if(Number(page)==1){%>onclick='return false;'}<%}%>> <i class="fa-solid fa-backward"></i></a>
                 <a href="/searchID?page=<%= Number(page)-1 %>" <%if(Number(page)==1){%>onclick='return false;'} <%}%>  >  <i class="fa-solid fa-arrow-left"></i>  </a>
+                <% } %>
                 <%= page %> Page
+                <% if(Number(page) != 10) {%>
                 <a href="/searchID?page=<%= Number(page)+1 %>" <%if(Number(page)==10){%>onclick='return false;'} <%}%> > <i class="fa-solid fa-arrow-right"></i> </a>
                 <a href="/searchID?page=10" <%if(Number(page)==10){%>onclick='return false;'} <%}%>> <i class="fa-solid fa-forward"></i> </a>
+                    <% } %>
             </div>
             
      </form>
@@ -98,7 +99,5 @@
             }
         }
     </script>
-
     </body>
-   
 </html>

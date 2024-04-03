@@ -11,7 +11,6 @@ const getAjaxForm = async (req, res) => {
     res.render('formAjax')
 }
 
-// submitDataAjax
 const postJobFormAjax = async (req, res) => {
     var { first_name, last_name, designation, email, phone_number, gender, relationship, address, address2, city, state, zipcode, date_of_birth } = req.body;
     var { course, board, pass_year, percentage } = req.body;
@@ -53,41 +52,31 @@ const postJobFormAjax = async (req, res) => {
         if (e.option_key == "Gujarati" && gujarati == "on") gujarati = e.oid;
     });
 
-    // basic_data
     var sqlBasic = `insert into emp_master(f_name,l_name,designation,email,contact,gender,relation,address_1,address_2,city,state,
       zipcode,dob) values(?,?,?,?,?,?,?,?,?,?,?,?,?)`
-    var basic = await con.promise().query(sqlBasic,[first_name, last_name, designation, email, phone_number, gender, relationship, address, address2, city, state, zipcode, date_of_birth])
+    var basic = await con.promise().query(sqlBasic, [first_name, last_name, designation, email, phone_number, gender, relationship, address, address2, city, state, zipcode, date_of_birth])
 
     var emp_id = 0;
-    console.log(basic);
     emp_id = basic[0].insertId;
-    console.log(emp_id);
 
-
-    // edu
     var sqlEdu = `insert into edu_master(emp_id,course,board,pass_year,percentage) values(?,?,?,?,?)`;
     for (let i = 0; i < course.length; i++) {
         await con.promise().query(sqlEdu, [emp_id, course[i], board[i], pass_year[i], percentage[i]])
     }
 
-    // ref
     var sqlRef = `insert into ref_contact_master(emp_id,ref_name,contact,relation) values(?,?,?,?);`;
-    console.log(ref_name);
     for (let i = 0; i < ref_name.length; i++) {
         await con.promise().query(sqlRef, [emp_id, ref_name[i], contact_name[i], relation_name[i]])
     }
 
-    //  work-exp
     var sqlWork = `insert into work_exp_master(emp_id,company_name,designation,From_date,To_date) values(?,?,?,?,?);`;
     for (let i = 0; i < com_name.length; i++) {
         await con.promise().query(sqlWork, [emp_id, com_name[i], des[i], from[i], to[i]]);
     }
 
-    // pref
     var sqlPref = `insert into pref_master(emp_id,location,notice_period,expected_CTC,current_CTC,department) values(?,?,?,?,?,?);`;
     await con.promise().query(sqlPref, [emp_id, location, notice, expCTC, curCTC, department]);
 
-    // Tech
     var sqlTechphp = `insert into tech_master(emp_id,Tech_name,Tech_level) values(?,?,?);`;
     var sqlTechmysql = `insert into tech_master(emp_id,Tech_name,Tech_level) values(?,?,?);`;
     var sqlTechlaravel = `insert into tech_master(emp_id,Tech_name,Tech_level) values(?,?,?);`;
@@ -98,7 +87,6 @@ const postJobFormAjax = async (req, res) => {
     if (laravel) await con.promise().query(sqlTechlaravel, [emp_id, laravel, techlaravel]);
     if (oracle) await con.promise().query(sqlTechoracle, [emp_id, oracle, techoracle]);
 
-    // Lang
     var sqlLang = `insert into lang_master(emp_id,languages,can_read,can_write,can_speak) values(?,?,?,?,?);`;
     if (hindi) {
         if (hindi_read == "on") { hindi_read = 1 } else { hindi_read = 0 };
@@ -175,9 +163,8 @@ const updateFormAjaxPost = async (req, res) => {
 
     let updateRecord = ` update emp_master set f_name=?,l_name=?,designation=?,email=?,contact=?,gender=?,relation=?,address_1=?,
     address_2=?,city=?,state=?,zipcode=?,dob=? where emp_id = '${emp_id}'`;
-    await con.promise().query(updateRecord,[first_name, last_name, designation, email, phone_number, gender, relationship, address, address2, city, state, zipcode, date_of_birth])
+    await con.promise().query(updateRecord, [first_name, last_name, designation, email, phone_number, gender, relationship, address, address2, city, state, zipcode, date_of_birth])
 
-    // update exp
     var { com_name, des, from, to } = req.body;
     var work_exp_id = req.body.work_exp_id;
     let updateExp = `update work_exp_master set company_name=?,designation=?,From_date=?,To_date=? where emp_id = ${emp_id} and work_exp_id = ?`;
@@ -187,7 +174,6 @@ const updateFormAjaxPost = async (req, res) => {
         }
     }
 
-    // update ref_contact
     var ref_id = req.body.ref_id;
     var { ref_name, contact_name, relation_name } = req.body;
     let updateRef = `update ref_contact_master set ref_name=?,contact=?,relation=? where emp_id = ${emp_id} and ref_id = ?`;
@@ -197,16 +183,14 @@ const updateFormAjaxPost = async (req, res) => {
         }
     }
 
-    // update pref
     var { location, department, notice, expCTC, curCTC } = req.body;
     let updatePref = `update pref_master set location=?,notice_period=?,expected_CTC=?,current_CTC=?,department=? where emp_id = ${emp_id}`;
     await con.promise().query(updatePref, [location, notice, expCTC, curCTC, department]);
 
-    // update education
+
     var { course, board, pass_year, percentage } = req.body;
     var { eid } = req.body;
     let updateEdu = `update edu_master set course=?,board=?,pass_year=?,percentage=? where emp_id = ${emp_id} and eid = ?`;
-
     if (course) {
         for (let i = 0; i < course.length; i++) {
             await con.promise().query(updateEdu, [course[i], board[i], pass_year[i], percentage[i], eid[i]]);
@@ -216,7 +200,6 @@ const updateFormAjaxPost = async (req, res) => {
     var sqlGet = `select option_master.oid,option_master.sid, option_master.option_key from select_master inner join 
     option_master on select_master.sid = option_master.sid `;
     let resultTech = await con.promise().query(sqlGet);
-
     resultTech[0].forEach(e => {
         if (e.option_key == "PHP" && php === "12") php = e.oid;
         if (e.option_key == "Beginer" && techphp == "Beginer") techphp = e.oid;
@@ -243,12 +226,10 @@ const updateFormAjaxPost = async (req, res) => {
         if (e.option_key == "Gujarati" && gujarati == "Gujarati") gujarati = e.oid;
     });
 
-    // update lang
     var { hindi, hindi_read, hindi_write, hindi_speak, gujarati, gujarati_read, gujarati_write, gujarati_speak, english, english_read, english_write, english_speak } = req.body;
     var lan_id = req.body.lan_id;
     var sqlLang1 = `update lang_master set languages=?,can_read=?,can_write=?,can_speak=? where emp_id = ${emp_id} and lan_id = ?`;
     if (hindi) {
-        console.log(sqlLang1);
         if (hindi_read == "on") { hindi_read = 1 } else { hindi_read = 0 };
         if (hindi_write == "on") { hindi_write = 1 } else { hindi_write = 0 };
         if (hindi_speak == "on") { hindi_speak = 1 } else { hindi_speak = 0 };

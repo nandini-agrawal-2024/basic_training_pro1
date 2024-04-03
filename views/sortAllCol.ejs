@@ -13,8 +13,11 @@
             height: 20px; background-color: aquamarine; color: black; padding: 10px;}
             div{text-align: end;}
         </style>
+        <header>
+            Nandini Agrawal : 24DEV075
+        </header>
     </head>
-    <body><h1>Student List From Database : 26Feb_Node</h1>
+    <body><h1>Sort Each Columns</h1>
         <table border="1">
             <tr>
                 <th>
@@ -97,10 +100,10 @@
         
             <%= page %> Page
             
-            <%if(Number(page)!=250){%>
+            <%if(Number(page)!=10){%>
             <a href="/SortCols?page=<%= Number(page)+1 %>&select=<%=sortField%>&sort=<%= sortorder %>"<%if(Number(page)==last){%>onclick='return false; '} <%}%>> 
                 <i class="fa-solid fa-arrow-right"></i> </a>
-            <a href="/SortCols?page=250&select=<%=sortField%>&sort=<%= sortorder %>"<%if(Number(page)==1){%>onclick='return false; '} <%}%> >   
+            <a href="/SortCols?page=10&select=<%=sortField%>&sort=<%= sortorder %>"<%if(Number(page)==1){%>onclick='return false; '} <%}%> >   
                 <i class="fa-solid fa-forward"></i> </a>
             <% } %>
         </div>

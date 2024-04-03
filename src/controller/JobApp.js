@@ -12,8 +12,7 @@ const getJobForm = async (req, res) => {
 }
 
 const postJobForm = async (req, res) => {
-  var { first_name, last_name, designation, email, phone_number, gender, relationship, address, address2, city, state,
-    zipcode, date_of_birth } = req.body;
+  var { first_name, last_name, designation, email, phone_number, gender, relationship, address, address2, city, state, zipcode, date_of_birth } = req.body;
   var { course, board, pass_year, percentage } = req.body;
   var { ref_name, contact_name, relation_name } = req.body;
   var { com_name, des, from, to } = req.body;
@@ -58,33 +57,25 @@ const postJobForm = async (req, res) => {
     zipcode,dob) values(?,?,?,?,?,?,?,?,?,?,?,?,?)`
   var basic = await con.promise().query(sqlBasic, [first_name, last_name, designation, email, phone_number, gender, relationship, address, address2, city, state, zipcode, date_of_birth])
 
-  console.log(basic);
   emp_id = basic[0].insertId;
-  console.log(emp_id);
 
   var sqlEdu = `insert into edu_master(emp_id,course,board,pass_year,percentage) values(?,?,?,?,?)`;
   for (let i = 0; i < course.length; i++) {
     await con.promise().query(sqlEdu, [emp_id, course[i], board[i], pass_year[i], percentage[i]])
   }
 
-  // ref
   var sqlRef = `insert into ref_contact_master(emp_id,ref_name,contact,relation) values(?,?,?,?);`;
-  console.log(ref_name);
   for (let i = 0; i < ref_name.length; i++) {
     await con.promise().query(sqlRef, [emp_id, ref_name[i], contact_name[i], relation_name[i]])
   }
 
-  //  work-exp
   var sqlWork = `insert into work_exp_master(emp_id,company_name,designation,From_date,To_date) values(?,?,?,?,?);`;
   for (let i = 0; i < com_name.length; i++) {
     await con.promise().query(sqlWork, [emp_id, com_name[i], des[i], from[i], to[i]]);
   }
 
-  // pref
   var sqlPref = `insert into pref_master(emp_id,location,notice_period,expected_CTC,current_CTC,department) values(?,?,?,?,?,?);`;
   await con.promise().query(sqlPref, [emp_id, location, notice, expCTC, curCTC, department]);
-
-  // Tech
 
   var sqlTechphp = `insert into tech_master(emp_id,Tech_name,Tech_level) values(?,?,?);`;
   var sqlTechmysql = `insert into tech_master(emp_id,Tech_name,Tech_level) values(?,?,?);`;
@@ -96,8 +87,6 @@ const postJobForm = async (req, res) => {
   if (laravel) await con.promise().query(sqlTechlaravel, [emp_id, laravel, techlaravel]);
   if (oracle) await con.promise().query(sqlTechoracle, [emp_id, oracle, techoracle]);
 
-  // Lang
-
   var sqlLang = `insert into lang_master(emp_id,languages,can_read,can_write,can_speak) values(?,?,?,?,?);`;
   if (hindi) {
     if (hindi_read == "on") { hindi_read = 1 } else { hindi_read = 0 };
@@ -105,14 +94,12 @@ const postJobForm = async (req, res) => {
     if (hindi_speak == "on") { hindi_speak = 1 } else { hindi_speak = 0 };
     await con.promise().query(sqlLang, [emp_id, hindi, hindi_read, hindi_write, hindi_speak]);
   }
-
   if (english) {
     if (english_read == "on") { english_read = 1 } else { english_read = 0 };
     if (english_write == "on") { english_write = 1 } else { english_write = 0 };
     if (english_speak == "on") { english_speak = 1 } else { english_speak = 0 };
     await con.promise().query(sqlLang, [emp_id, english, english_read, english_write, english_speak]);
   }
-
   if (gujarati) {
     if (gujarati_read == "on") { gujarati_read = 1 } else { gujarati_read = 0 };
     if (gujarati_write == "on") { gujarati_write = 1 } else { gujarati_write = 0 };
@@ -120,11 +107,9 @@ const postJobForm = async (req, res) => {
     await con.promise().query(sqlLang, [emp_id, gujarati, gujarati_read, gujarati_write, gujarati_speak]);
   }
 
-  // const selectQ = `select * from emp_master WHERE emp_id='${emp_id}' `;
   const selectQ = `select * from emp_master WHERE emp_id='${emp_id}' `;
   con.query(selectQ, (err, result) => {
     if (err) throw err;
-    console.log(result);
     res.render('listEmp', { result })
   })
 }
@@ -170,7 +155,6 @@ const getEmpData = async (req, res) => {
   res.render('updateFormEmp', { result, result2, result3, result4, result5, result6, result7, php, mysql, laravel, oracle })
 }
 
-
 const updateFormPost = async (req, res) => {
   var emp_id = req.params.emp_id;
   var { first_name, last_name, designation, email, phone_number, gender, relationship, address, address2, city, state,
@@ -181,7 +165,6 @@ const updateFormPost = async (req, res) => {
   await con.promise().query(updateRecord,
     [first_name, last_name, designation, email, phone_number, gender, relationship, address, address2, city, state, zipcode, date_of_birth])
 
-  // update exp
   var { com_name, des, from, to } = req.body;
   var work_exp_id = req.body.work_exp_id;
   let updateExp = `update work_exp_master set company_name=?,designation=?,From_date=?,To_date=? where emp_id = ${emp_id} and work_exp_id = ?`;
@@ -191,7 +174,6 @@ const updateFormPost = async (req, res) => {
     }
   }
 
-  // update ref_contact
   var ref_id = req.body.ref_id;
   var { ref_name, contact_name, relation_name } = req.body;
   let updateRef = `update ref_contact_master set ref_name=?,contact=?,relation=? where emp_id = ${emp_id} and ref_id = ?`;
@@ -201,12 +183,9 @@ const updateFormPost = async (req, res) => {
     }
   }
 
-  // update pref
   var { location, department, notice, expCTC, curCTC } = req.body;
   let updatePref = `update pref_master set location=?,notice_period=?,expected_CTC=?,current_CTC=?,department=? where emp_id = ${emp_id}`;
   await con.promise().query(updatePref, [location, notice, expCTC, curCTC, department]);
-
-  // update education
 
   var { course, board, pass_year, percentage } = req.body;
   var { eid } = req.body;
@@ -248,9 +227,7 @@ const updateFormPost = async (req, res) => {
     if (e.option_key == "Gujarati" && gujarati == "Gujarati") gujarati = e.oid;
   });
 
-  // update lang
-  var { hindi, hindi_read, hindi_write, hindi_speak, gujarati, gujarati_read, gujarati_write, gujarati_speak,
-    english, english_read, english_write, english_speak } = req.body;
+  var { hindi, hindi_read, hindi_write, hindi_speak, gujarati, gujarati_read, gujarati_write, gujarati_speak, english, english_read, english_write, english_speak } = req.body;
   var lan_id = req.body.lan_id;
   var sqlLang1 = `update lang_master set languages=?,can_read=?,can_write=?,can_speak=? where emp_id = ${emp_id} and lan_id = ?`;
   if (hindi) {
@@ -273,8 +250,6 @@ const updateFormPost = async (req, res) => {
     await con.promise().query(sqlLang1, [gujarati, gujarati_read, gujarati_write, gujarati_speak, lan_id[2]]);
   }
 
-
-  // update tech
   var { php, techphp, mysql, techmysql, laravel, techlaravel, oracle, techoracle } = req.body;
   var tech_id = req.body.tech_id;
 
@@ -285,10 +260,8 @@ const updateFormPost = async (req, res) => {
   if (laravel) await con.promise().query(updateTech, [laravel, techlaravel, tech_id[2]]);
   if (oracle) await con.promise().query(updateTech, [oracle, techoracle, tech_id[3]]);
   res.send("Data Updated");
-
 }
 
-module.exports =
-{
+module.exports = {
   getJobForm, postJobForm, getEmpData, updateFormPost
 }

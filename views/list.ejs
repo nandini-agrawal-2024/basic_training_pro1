@@ -1,64 +1,97 @@
 <!-- display all students record -->
 <html>
-    <head>
-        <style>
-            table{height: 30%; width: 100%;border-color: azure;}
-            th{
-                background-color: cadetblue; font-weight: bold;color: azure; 
-                padding: 10px;}
-                h1{text-align: center; margin-top: 20px;}
-            th,td{text-align: center;} a{color: black;text-decoration: none;}
-        </style>
-    </head>
-    <body><h1>24DEV075 : Nandini Agrawal </h1>
-        <table border="1">
 
-            <tr>
-                <th rowspan="2">Student ID</th>
-                <th rowspan="2">Student Name</th>
-                <th colspan="2">Fianl Exam</th>
-                <th colspan="2">Prelim Exam</th>
-                <th colspan="2">Terminal Exam</th>
-                <th rowspan="2">Total Obtained/1200</th>
-                <th rowspan="2">View</th>
+<head>
+    <style>
+        table {
+            height: 30%;
+            width: 100%;
+            border-color: azure;
+        }
 
-            </tr>
+        th {
+            background-color: cadetblue;
+            font-weight: bold;
+            color: azure;
+            padding: 10px;
+        }
 
-           <tr>
-                <th>Prac</th>
-                <th>Theory</th>
-                <th>Prac</th>
-                <th>Theory</th>
-                <th>Prac</th>
-                <th>Theory</th>
-           </tr>
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
 
-            <div>
-                <%- include('./pagecompResult', {page}) %>  
-            </div>
+        th,
+        td {
+            text-align: center;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>24DEV075 : Nandini Agrawal </h1>
+    <table border="1">
+
+        <tr>
+            <th rowspan="2">Student ID</th>
+            <th rowspan="2">Student Name</th>
+            <th colspan="2">Fianl Exam</th>
+            <th colspan="2">Prelim Exam</th>
+            <th colspan="2">Terminal Exam</th>
+            <th rowspan="2">Total Obtained/1200</th>
+            <th rowspan="2">View</th>
+
+        </tr>
+
+        <tr>
+            <th>Prac</th>
+            <th>Theory</th>
+            <th>Prac</th>
+            <th>Theory</th>
+            <th>Prac</th>
+            <th>Theory</th>
+        </tr>
+
+        <div>
+            <%- include('./pagecompResult', {page}) %>
+        </div>
 
         <form method="get">
-            <% for(let index=0; index<result.length; index+= 3){%>
+            <% for(let index=0; index<result.length; index+=3){%>
                 <tr>
-                    <td> <%= result[index].stu_id %></td>
-                    <td> <%= result[index].stu_name %></td>
-                    <!-- loop for 3 exam -->
-                    <% for(let i=index; i<index + 3; i++) { %>
-                        <% if(result[i].stu_id == result[index].stu_id) { %> 
-                        <td><%= result[i].prac %></td>
-                        <td><%= result[i].th %></td>
-                        
-                    <%}%>
-                    <% } %>
                     <td>
-                        <%= result[index].prac + result[index].th + result[index+1].prac + result[index+1].th 
-                        + result[index+2].prac + result[index+2].th %>
+                        <%= result[index].stu_id %>
                     </td>
                     <td>
-                        <a href="/view?stu_id=<%=result[index].stu_id %>">View</a></td>
+                        <%= result[index].stu_name %>
+                    </td>
+                    <!-- loop for 3 exam -->
+                    <% for(let i=index; i<index + 3; i++) { %>
+                        <% if(result[i].stu_id==result[index].stu_id) { %>
+                            <td>
+                                <%= result[i].prac %>
+                            </td>
+                            <td>
+                                <%= result[i].th %>
+                            </td>
+
+                        <%}%>
+                    <% } %>
+                    <td>
+                        <%= result[index].prac + result[index].th + result[index+1].prac + result[index+1].th + result[index+2].prac + result[index+2].th %>
+                    </td>
+                    <td>
+                        <a href="/view?stu_id=<%=result[index].stu_id %>">View</a>
+                    </td>
                 </tr>
             <%}%>
 
         </form>
-    </body>
+</body>
+
 </html>

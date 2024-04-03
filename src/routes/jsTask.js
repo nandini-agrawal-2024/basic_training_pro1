@@ -5,9 +5,9 @@ const con = require('../config/connect')
 
 const login = express.Router();
 const {
-    cityStateget,getSates,getCities,
+    cityStateget, getSates, getCities,
     timeZoneget,
-    kukucubeget,dynamic_tableget,tictacget,sortAlgget,jsEventsget,jobAppget,
+    kukucubeget, dynamic_tableget, tictacget, sortAlgget, jsEventsget, jobAppget,
 } = require('../controller/jsTask')
 
 
