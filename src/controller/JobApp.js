@@ -1,7 +1,7 @@
-var express = require("express")
-var bodyparser = require("body-parser")
-var con = require('../config/connect')
-var app = express()
+let express = require("express")
+let bodyparser = require("body-parser")
+let con = require('../config/connect')
+let app = express()
 app.use(express.static("public"))
 app.use(express.static('views'))
 app.use(bodyparser.urlencoded({ extended: true }))
@@ -12,16 +12,16 @@ const getJobForm = async (req, res) => {
 }
 
 const postJobForm = async (req, res) => {
-  var { first_name, last_name, designation, email, phone_number, gender, relationship, address, address2, city, state, zipcode, date_of_birth } = req.body;
-  var { course, board, pass_year, percentage } = req.body;
-  var { ref_name, contact_name, relation_name } = req.body;
-  var { com_name, des, from, to } = req.body;
-  var { location, department, notice, expCTC, curCTC } = req.body;
-  var { php, techphp, mysql, techmysql, laravel, techlaravel, oracle, techoracle } = req.body;
-  var { hindi, hindi_read, hindi_write, hindi_speak, gujarati, gujarati_read, gujarati_write, gujarati_speak,
+  let { first_name, last_name, designation, email, phone_number, gender, relationship, address, address2, city, state, zipcode, date_of_birth } = req.body;
+  let { course, board, pass_year, percentage } = req.body;
+  let { ref_name, contact_name, relation_name } = req.body;
+  let { com_name, des, from, to } = req.body;
+  let { location, department, notice, expCTC, curCTC } = req.body;
+  let { php, techphp, mysql, techmysql, laravel, techlaravel, oracle, techoracle } = req.body;
+  let { hindi, hindi_read, hindi_write, hindi_speak, gujarati, gujarati_read, gujarati_write, gujarati_speak,
     english, english_read, english_write, english_speak } = req.body;
 
-  var sql = `select option_master.oid,option_master.sid, option_master.option_key from select_master inner join 
+    let sql = `select option_master.oid,option_master.sid, option_master.option_key from select_master inner join 
   option_master on select_master.sid = option_master.sid `;
   SSC = 0; HSC = 0; Bachelor = 0; Master = 0;
 
@@ -52,35 +52,35 @@ const postJobForm = async (req, res) => {
     if (e.option_key == "Gujarati" && gujarati == "on") gujarati = e.oid;
   });
 
-  var emp_id = 0;
-  var sqlBasic = `insert into emp_master(f_name,l_name,designation,email,contact,gender,relation,address_1,address_2,city,state,
+  let emp_id = 0;
+  let sqlBasic = `insert into emp_master(f_name,l_name,designation,email,contact,gender,relation,address_1,address_2,city,state,
     zipcode,dob) values(?,?,?,?,?,?,?,?,?,?,?,?,?)`
-  var basic = await con.promise().query(sqlBasic, [first_name, last_name, designation, email, phone_number, gender, relationship, address, address2, city, state, zipcode, date_of_birth])
+    let basic = await con.promise().query(sqlBasic, [first_name, last_name, designation, email, phone_number, gender, relationship, address, address2, city, state, zipcode, date_of_birth])
 
   emp_id = basic[0].insertId;
 
-  var sqlEdu = `insert into edu_master(emp_id,course,board,pass_year,percentage) values(?,?,?,?,?)`;
+  let sqlEdu = `insert into edu_master(emp_id,course,board,pass_year,percentage) values(?,?,?,?,?)`;
   for (let i = 0; i < course.length; i++) {
     await con.promise().query(sqlEdu, [emp_id, course[i], board[i], pass_year[i], percentage[i]])
   }
 
-  var sqlRef = `insert into ref_contact_master(emp_id,ref_name,contact,relation) values(?,?,?,?);`;
+  let sqlRef = `insert into ref_contact_master(emp_id,ref_name,contact,relation) values(?,?,?,?);`;
   for (let i = 0; i < ref_name.length; i++) {
     await con.promise().query(sqlRef, [emp_id, ref_name[i], contact_name[i], relation_name[i]])
   }
 
-  var sqlWork = `insert into work_exp_master(emp_id,company_name,designation,From_date,To_date) values(?,?,?,?,?);`;
+  let sqlWork = `insert into work_exp_master(emp_id,company_name,designation,From_date,To_date) values(?,?,?,?,?);`;
   for (let i = 0; i < com_name.length; i++) {
     await con.promise().query(sqlWork, [emp_id, com_name[i], des[i], from[i], to[i]]);
   }
 
-  var sqlPref = `insert into pref_master(emp_id,location,notice_period,expected_CTC,current_CTC,department) values(?,?,?,?,?,?);`;
+  let sqlPref = `insert into pref_master(emp_id,location,notice_period,expected_CTC,current_CTC,department) values(?,?,?,?,?,?);`;
   await con.promise().query(sqlPref, [emp_id, location, notice, expCTC, curCTC, department]);
 
-  var sqlTechphp = `insert into tech_master(emp_id,Tech_name,Tech_level) values(?,?,?);`;
-  var sqlTechmysql = `insert into tech_master(emp_id,Tech_name,Tech_level) values(?,?,?);`;
-  var sqlTechlaravel = `insert into tech_master(emp_id,Tech_name,Tech_level) values(?,?,?);`;
-  var sqlTechoracle = `insert into tech_master(emp_id,Tech_name,Tech_level) values(?,?,?);`;
+  let sqlTechphp = `insert into tech_master(emp_id,Tech_name,Tech_level) values(?,?,?);`;
+  let sqlTechmysql = `insert into tech_master(emp_id,Tech_name,Tech_level) values(?,?,?);`;
+  let sqlTechlaravel = `insert into tech_master(emp_id,Tech_name,Tech_level) values(?,?,?);`;
+  let sqlTechoracle = `insert into tech_master(emp_id,Tech_name,Tech_level) values(?,?,?);`;
 
   if (php) await con.promise().query(sqlTechphp, [emp_id, php, techphp]);
   if (mysql) await con.promise().query(sqlTechmysql, [emp_id, mysql, techmysql]);

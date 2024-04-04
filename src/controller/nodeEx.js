@@ -143,11 +143,11 @@ const getAttResult = async (req, res) => {
 const getStudentSort = async (req, res) => {
     let page = req.query.page || 1;
 
-    if (page > 30 || page < 0) {
+    if (page > 10 || page < 0) {
         res.redirect('/');
     }
 
-    const limit = 10000;
+    const limit = 100;
     const order = req.query.order || 'asc';
     const offset = (page - 1) * limit;
 
@@ -159,10 +159,6 @@ const getStudentSort = async (req, res) => {
 }
 
 const getSearchDel = async (req, res) => {
-    const page = req.query.page || 1;
-    const limit = 100;
-    const lastpage = Math.ceil(50000 / 100);
-    const offset = (page - 1) * limit;
 
     var sql = `select * from student_masterr`;
     const input = req.query.input;
@@ -274,8 +270,8 @@ const getSearchID = async (req, res) => {
 const getSortCols = async (req, res) => {
     let page = req.query.page || 1;
 
-    const limit = 30000;
-    const last = Math.ceil(300000 / limit)
+    const limit = 10;
+    const last = Math.ceil(100 / limit)
     const offset = (page - 1) * limit;
 
     const sortorder = req.query.sort === 'desc' ? 'desc' : 'asc';

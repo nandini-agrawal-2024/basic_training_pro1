@@ -19,7 +19,7 @@
 
         table {
             border: 1;
-            width: 300px;
+            width: 60%;
             border-collapse: collapse;
             height: 60%;
             align-content: center;
@@ -63,7 +63,7 @@
         function onblurFunc() {
             const e1 = document.getElementById('event1')
             e1.value = e1.value.toUpperCase();
-            alert('onClick Event');
+            alert('onBlur Event : change to uppercase');
         }
 
         function course() {
@@ -73,12 +73,12 @@
 
         function selectFun() {
             document.getElementById('event3').innerHTML =
-                "selected text";
+                "selected text event called";
         }
 
         function submitFunc() {
             namee = document.getElementById('namee').value;
-            alert(namee + "Redirecting to your url")
+            alert(namee + ": Redirecting to your url")
         }
 
         function onresetFunc() {
@@ -134,6 +134,10 @@
                 = "copy event called";
         }
 
+        function focusFun(x) {
+        x.style.background = "yellow";
+        }
+
         window.addEventListener('online', onlineFunc)
         window.addEventListener('offline', offlineFunc)
 
@@ -150,11 +154,11 @@
 </head>
 
 <body onload="pageloadFunc()">
-    <form onsubmit="submitFunc()" action="/home/nandini-agrawal/nandini_agr/js/jobApp">
+    <form onsubmit="submitFunc()" action="/welcome">
         <table class="center">
             <tr>
                 <td class="white">
-                    onblur Event
+                    ChangeToUppercase Event
                     <input type="text" placeholder="Enter Name" id="event1" onblur="onblurFunc()">
                 </td>
                 <td class="gray">
@@ -171,9 +175,9 @@
                     <input type="text" value="nandini agrawal" onselect="selectFun()">
                     <p id="event3"></p>
                 </td>
-                <td class="gray">onsubmit Event
-                    <input type="text" id="namee" size="10">
-                    <input type="submit">
+                <td class="gray">onsubmit Event 
+                    <input type="text" id="namee" size="10"><br><br>
+                    <input type="submit" value="click"> 
                 </td>
                 <td class="white">onreset Event
                     <input type="text" placeholder="Your Name" value="Nandini Agrawal" size="20">
@@ -217,7 +221,10 @@
                     <p id="copy1"></p>
                 </td>
                 <td class="white">
-                    <p id="status">Onlin Offline Status</p>
+
+                    Enter your name: <input type="text" onfocus="focusFun(this)">
+
+                    <!-- <p id="status">Onlin Offline Status</p> -->
                 </td>
             </tr>
 

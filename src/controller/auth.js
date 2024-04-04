@@ -174,6 +174,6 @@ const forgotPost = async (req, res) => {
 
 module.exports = {
   newTokencreate, getStart, getIndex, postSignUp, getSignUp, postPass, getPass, postLoginAuth, getLoginAuth,
-  forgotPost, forgotGet,
+  forgotPost, forgotGet
 }
 

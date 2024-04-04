@@ -1,4 +1,3 @@
-<!-- display all students record -->
 <html>
 
 <head>
@@ -82,16 +81,18 @@
 
                         <%}%>
                     <% } %>
+
                     <td>
-                        <%= result[index].prac + result[index].th + result[index+1].prac + result[index+1].th + result[index+2].prac + result[index+2].th %>
+                        <%= Number(result[index].prac) + Number(result[index].th) + Number(result[index+1].prac) +
+                        Number(result[index+1].th) + Number(result[index+2].prac) + Number(result[index+2].th) %>
                     </td>
                     <td>
                         <a href="/view?stu_id=<%=result[index].stu_id %>">View</a>
                     </td>
                 </tr>
+                
             <%}%>
 
         </form>
 </body>
-
 </html>

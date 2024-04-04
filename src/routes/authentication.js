@@ -7,7 +7,7 @@ const login = express.Router();
 const {
     getStart, getIndex, postSignUp, getSignUp, postPass, getPass, postLoginAuth, getLoginAuth, forgotPost, forgotGet,
 
-    newTokencreate
+    newTokencreate,
 } = require('../controller/auth')
 
 
@@ -20,5 +20,6 @@ login.route("/insert").post(postSignUp);
 login.route("/loginAuth").get(getLoginAuth).post(postLoginAuth);
 login.route("/password").get(getPass).post(postPass);
 login.route("/forgot").get(forgotGet).post(forgotPost);
+
 
 module.exports = login;

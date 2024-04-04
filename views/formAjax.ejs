@@ -281,45 +281,42 @@
                 <table>
                     <tr>
                         <td>
-                            <input type="checkbox" name="hindi" id="hindi">
+                            <input type="checkbox" name="hindi" id="hindi" onchange="validateform()">
                         <td><label for="hindi">Hindi</label></td>
                         <td><label for="hindi_read">Read</label>
                         <td>
-                            <input type="checkbox" name="hindi_read" id="hindi_read">
+                            <input type="checkbox" name="hindi_read" id="hindi_read" onchange="validateform()">
                             <label for="hindi_write">Write</label>
-                            <input type="checkbox" name="hindi_write" id="hindi_write">
+                            <input type="checkbox" name="hindi_write" id="hindi_write" onchange="validateform()">
                             <label for="hindi_speak">Speak</label>
-                            <input type="checkbox" name="hindi_speak" id="hindi_speak">
-                            <span id="errHindi"></span>
+                            <input type="checkbox" name="hindi_speak" id="hindi_speak" onchange="validateform()">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="checkbox" name="english" id="english">
+                            <input type="checkbox" name="english" id="english" onchange="validateform()">
                         <td><label for="english">English</label></td>
 
                         <td><label for="english_read">Read</label>
                         <td>
-                            <input type="checkbox" name="english_read" id="english_read">
+                            <input type="checkbox" name="english_read" id="english_read" onchange="validateform()">
                             <label for="english_write">Write</label>
-                            <input type="checkbox" name="english_write" id="english_write">
+                            <input type="checkbox" name="english_write" id="english_write" onchange="validateform()">
                             <label for="english_speak">Speak</label>
-                            <input type="checkbox" name="english_speak" id="english_speak">
-                            <span id="errEng"></span>
+                            <input type="checkbox" name="english_speak" id="english_speak" onchange="validateform()">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="checkbox" name="gujarati" id="gujarati">
+                            <input type="checkbox" name="gujarati" id="gujarati" onchange="validateform()">
                         <td><label for="gujarati">Gujarati </label></td>
                         <td><label for="gujarati_read">Read</label>
                         <td>
-                            <input type="checkbox" name="gujarati_read" id="gujarati_read">
+                            <input type="checkbox" name="gujarati_read" id="gujarati_read" onchange="validateform()">
                             <label for="gujarati_write">Write</label>
-                            <input type="checkbox" name="gujarati_write" id="gujarati_write">
+                            <input type="checkbox" name="gujarati_write" id="gujarati_write" onchange="validateform()">
                             <label for="gujarati_speak">Speak</label>
-                            <input type="checkbox" name="gujarati_speak" id="gujarati_speak">
-                            <span id="errGuj"></span>
+                            <input type="checkbox" name="gujarati_speak" id="gujarati_speak" onchange="validateform()">
                         </td>
                     </tr>
                 </table>
@@ -341,8 +338,7 @@
 
                             <label for="expert1">Expert</label>
                             <input type="radio" name="techphp" id="php" value="Expert">
-                            <br>
-                            <span id="errPhp"></span>
+                            <!-- <span id="errPhp"></span> -->
                         </td>
                     </tr>
                     <tr>
@@ -354,7 +350,7 @@
                             <input type="radio" name="techmysql" value="Mideator">
                             <label for="expert2">Expert</label>
                             <input type="radio" name="techmysql" value="Expert">
-                            <span id="errMysql"></span>
+                            <!-- <span id="errMysql"></span> -->
                         </td>
                     </tr>
                     <tr>
@@ -366,7 +362,7 @@
                             <input type="radio" name="techlaravel" value="Mideator">
                             <label for="expert3">Expert</label>
                             <input type="radio" name="techlaravel" value="Expert">
-                            <span id="errLaravel"></span>
+                            <!-- <span id="errLaravel"></span> -->
                         </td>
                     </tr>
 
@@ -716,17 +712,18 @@
             }
         }
 
-        if (curTab == 2) {
+        if (curTab == 2) 
+        {
             var com_name = document.getElementById("com_name").value;
             document.getElementById('errComname').innerHTML = '';
             var des = document.getElementById("des").value;
-            document.getElementById('errDes').innerHTML = '';
+            document.getElementById('errDes1').innerHTML = '';
             if (!/^[a-zA-Z a-zA-Z]+$/.test(com_name)) {
                 errComname.innerHTML = "Enter Valid Data"
                 isValid = false
             }
             if (!/^[a-zA-Z a-zA-Z]+$/.test(des)) {
-                errDes.innerHTML = "Enter Valid Data"
+                errDes1.innerHTML = "Enter Valid Data"
                 isValid = false
             }
 
@@ -745,28 +742,83 @@
         }
 
         if (curTab == 3) {
-            var hindi = document.querySelectorAll('input[name="hindi"]:checked')
-            document.getElementById('errHindi').innerHTML = '';
-            if (hindi.length === 0) {
-                errHindi.innerHTML = "Select atleast one option!"
-                isValid = false
+            var hindi = document.getElementById("hindi");
+            var hindi_read = document.getElementById("hindi_read");
+            var hindi_write = document.getElementById("hindi_write");
+            var hindi_speak = document.getElementById("hindi_speak");
+            if(hindi.checked)
+            {
+                hindi_read.disabled = false;
+                hindi_write.disabled = false;
+                hindi_speak.disabled = false;
+            }
+            else{
+                hindi_read.disabled = true
+                hindi_write.disabled = true;
+                hindi_speak.disabled = true;
+
+                hindi_read.checked = false;
+                hindi_write.checked = false;
+                hindi_speak.checked = false;
             }
 
-            var english = document.querySelectorAll('input[name="english"]:checked')
-            document.getElementById('errEng').innerHTML = '';
-            if (english.length === 0) {
-                errEng.innerHTML = "Select atleast one option!"
-                isValid = false
+            var english= document.getElementById("english");
+            var english_read = document.getElementById("english_read");
+            var english_write = document.getElementById("english_write");
+            var english_speak = document.getElementById("english_speak");
+            if(english.checked)
+            {
+                english_read.disabled = false;
+                english_write.disabled = false;
+                english_speak.disabled = false;
+            }
+            else{
+                english_read.disabled = true
+                english_write.disabled = true;
+                english_speak.disabled = true;
+
+                english_read.checked = false;
+                english_write.checked = false;
+                english_speak.checked = false;
             }
 
-            var gujarati = document.querySelectorAll('input[name="gujarati"]:checked')
-            document.getElementById('errGuj').innerHTML = '';
-            if (gujarati.length === 0) {
-                errGuj.innerHTML = "Select atleast one option!"
-                isValid = false
+            var gujarati= document.getElementById("gujarati");
+            var gujarati_read = document.getElementById("gujarati_read");
+            var gujarati_write = document.getElementById("gujarati_write");
+            var gujarati_speak = document.getElementById("gujarati_speak");
+            if(gujarati.checked)
+            {
+                gujarati_read.disabled = false;
+                gujarati_write.disabled = false;
+                gujarati_speak.disabled = false;
+            }
+            else{
+                gujarati_read.disabled = true
+                gujarati_write.disabled = true;
+                gujarati_speak.disabled = true;
+                
+                gujarati_read.checked = false;
+                gujarati_write.checked = false;
+                gujarati_speak.checked = false;
             }
         }
 
+        if (curTab == 4) 
+        {
+            var php = document.querySelectorAll('input[name="php"]:checked');
+            var mysql = document.querySelectorAll('input[name="mysql"]:checked');
+            var laravel = document.querySelectorAll('input[name="laravel"]:checked');
+            var oracle = document.querySelectorAll('input[name="oracle"]:checked');
+            if (php.length === 0 || mysql.length === 0 || laravel.length === 0 || oracle.length === 0 ) 
+            {
+                errOracle.innerHTML = "Select atleast one Technology!"
+                isValid = false
+            }
+            else{
+                isValid = true;
+            }
+        }
+        
         if (curTab == 5) {
             var ref_name = document.getElementById("ref_name").value;
             document.getElementById('errRefname').innerHTML = '';
@@ -818,7 +870,11 @@
             }
         }
 
+        
+
         return isValid;
+
+
     }
 
     let education = 3;
@@ -848,23 +904,31 @@
     }
 
     exp = 2;
-    function addWork() {
+    function addWork() 
+    {
         row1 = document.getElementsByClassName("row1")[0];
         div = document.createElement("div");
         div.setAttribute("class", "exp")
-        div.innerHTML =
+        if(validateform())
+        {
+            div.innerHTML =
             `
-            <label for="com_name">Company Name</label>
-            <input type="text" name="com_name[]" id="com_name">
-            <label for="des">Designation</label>
-            <input type="text" name="des[]" id="des">
-            <label for="from">From</label>
-            <input type="text" name="from[]" id="from">
-            <label for="to">To</label>
-            <input type="text" name="to" id="to">
-    `;
-        exp++;
-        row1.appendChild(div);
+                <label for="com_name">Company Name</label>
+                <input type="text" name="com_name[]" id="com_name">
+                <span id="errComname"></span>
+                <label for="des">Designation</label>
+                <input type="text" name="des[]" id="des">
+                <span id="errDes1"></span>
+                <label for="from">From</label>
+                <input type="text" name="from[]" id="from">
+                <span id="errFrom"></span>
+                <label for="to">To</label>
+                <input type="text" name="to[]" id="to">
+                <span id="errTo"></span>
+            `;
+            exp++;
+            row1.appendChild(div);
+        }
     }
 
     ref = 2;
