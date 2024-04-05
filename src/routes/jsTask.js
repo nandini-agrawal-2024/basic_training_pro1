@@ -9,21 +9,22 @@ const {
     timeZoneget,
     kukucubeget, dynamic_tableget, tictacget, sortAlgget, jsEventsget, jobAppget,
 } = require('../controller/jsTask')
+const validUser = require('../middleware/token')
 
 
-login.route("/kukucube").get(kukucubeget);
-login.route("/dynamic_table").get(dynamic_tableget);
-login.route("/tictac").get(tictacget);
-login.route("/sortAlg").get(sortAlgget);
-login.route("/jsEvents").get(jsEventsget);
+login.route("/kukucube").get(validUser,kukucubeget);
+login.route("/dynamic_table").get(validUser,dynamic_tableget);
+login.route("/tictac").get(validUser,tictacget);
+login.route("/sortAlg").get(validUser,sortAlgget);
+login.route("/jsEvents").get(validUser,jsEventsget);
 
-login.route("/jobApp").get(jobAppget);
+login.route("/jobApp").get(validUser,jobAppget);
 
-login.route("/timezone").get(timeZoneget);
+login.route("/timezone").get(validUser,timeZoneget);
 
-login.route("/cityState").get(cityStateget);
-login.route('/state').get(getSates);
-login.route('/city/:state').get(getCities);
+login.route("/cityState").get(validUser,cityStateget);
+login.route('/state').get(validUser,getSates);
+login.route('/city/:state').get(validUser,getCities);
 
 
 module.exports = login;

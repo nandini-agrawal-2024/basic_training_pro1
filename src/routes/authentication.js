@@ -9,12 +9,12 @@ const {
 
     newTokencreate,
 } = require('../controller/auth')
-
+const validUser = require('../middleware/token')
 
 login.route("/newTokencreate").get(newTokencreate);
 
 login.route("/").get(getIndex);
-login.route("/welcome").get(getStart);
+login.route("/welcome").get(validUser,getStart);
 login.route("/signup").get(getSignUp);
 login.route("/insert").post(postSignUp);
 login.route("/loginAuth").get(getLoginAuth).post(postLoginAuth);
